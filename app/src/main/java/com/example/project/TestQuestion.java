@@ -77,7 +77,8 @@ public class TestQuestion extends AppCompatActivity {
         choices[correctAnswer-1].setBackgroundResource(R.drawable.correction);
         if (answer!=correctAnswer && answer!=-1)
             choices[answer-1].setBackgroundResource(R.drawable.wrong);
-        else choices[correctAnswer-1].setBackgroundResource(R.drawable.correct);
+        else if (answer!=-1)
+            choices[correctAnswer-1].setBackgroundResource(R.drawable.correct);
     }
 
     public void save(View view){
