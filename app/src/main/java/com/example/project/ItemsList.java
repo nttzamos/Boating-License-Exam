@@ -11,9 +11,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class ItemsList extends AppCompatActivity implements Adapter.OnQuestionListener {
-    private ArrayList<String> questions = new ArrayList<>();
-    private ArrayList<Integer> savedQuestions = new ArrayList<>();
-    private ArrayList<Boolean> trueOrFalse = new ArrayList<>();
+    private ArrayList<String> questions;
+    private ArrayList<Integer> savedQuestions;
+    private ArrayList<Boolean> trueOrFalse;
     private int testId;
     private String code;
 
@@ -26,6 +26,14 @@ public class ItemsList extends AppCompatActivity implements Adapter.OnQuestionLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_items_list);
+    }
+
+    @Override
+    public void onResume() {
+        System.out.println("Resumed");
+        questions = new ArrayList<>();
+        savedQuestions = new ArrayList<>();
+        trueOrFalse = new ArrayList<>();
 
         message1 = findViewById(R.id.message1);
         message2 = findViewById(R.id.message2);
@@ -36,6 +44,7 @@ public class ItemsList extends AppCompatActivity implements Adapter.OnQuestionLi
         if (code.equals("test_questions") || code.equals("previous_attempts"))
             testId = getIntent().getIntExtra("testId", 0);
         initQuestions();
+        super.onResume();
     }
 
     private void initQuestions(){

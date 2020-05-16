@@ -340,7 +340,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         String selectQuery = "SELECT MAX(" + TABLE_SAVED_QUESTIONS + "." + COLUMN_ID +  ") FROM " +  TABLE_SAVED_QUESTIONS;
         SQLiteDatabase database = this.getWritableDatabase();
         Cursor cursor = database.rawQuery(selectQuery, null);
-        if (cursor.moveToFirst())
+        if (cursor.moveToFirst() && cursor.getString(0) != null )
             currentSavedId = Integer.parseInt(cursor.getString(0)) + 1;
         else currentSavedId = 1;
         System.out.println("Maximum plus 1 is : " + currentSavedId );

@@ -32,16 +32,16 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         View view;
         if (code.equals("tests_list"))
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.one_test, parent, false);
-        else view = LayoutInflater.from(parent.getContext()).inflate(R.layout.one_question, parent, false);
+        else view = LayoutInflater.from(parent.getContext()).inflate(R.layout.question_new, parent, false);
         return new ViewHolder(view, mOnQuestionListener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        if (!code.equals("tests_list")) {
+        if (!code.equals("tests_list") && !code.equals("saved_questions")) {
             if (mTrueOrFalse.get(position))
-                holder.trueOrFalse.setImageResource(R.drawable.checkbox);
-            else holder.trueOrFalse.setImageResource(R.drawable.false_checkbox);
+                holder.trueOrFalse.setImageResource(R.drawable.custom_correct);
+            else holder.trueOrFalse.setImageResource(R.drawable.custom_wrong);
         }
 
         if(mQuestion.get(position).length()<95)

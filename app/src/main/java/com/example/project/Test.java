@@ -29,6 +29,8 @@ public class Test extends AppCompatActivity {
 
     CountDownTimer countDownTimer;
     boolean isPaused;
+    AlertDialog.Builder builder;
+    AlertDialog alert;
 
     QuestionDB[] questions;
     TriesDB[] testQuestions;
@@ -49,6 +51,9 @@ public class Test extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (question != null)
+            System.out.println(question.getText());
+
         setContentView(R.layout.activity_test);
 
         question = findViewById(R.id.question);
@@ -88,13 +93,11 @@ public class Test extends AppCompatActivity {
         isPaused = false;
 
         setTexts();
+        setDialog();
     }
 
-    @Override
-    public void onBackPressed(){
-        isPaused = true;
-        countDownTimer.cancel();
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
+    private void setDialog() {
+        builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
         builder.setTitle("Warning!!");
         builder.setMessage("Are you sure you want to exit? The test will be deleted.");
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -102,26 +105,36 @@ public class Test extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
                 finish();
+                countDownTimer.cancel();
             }
         });
         builder.setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
-                initCountDownTimer(timeRemaining);
+                isPaused = false;
             }
         });
-        AlertDialog alert = builder.create();
+        alert = builder.create();
+    }
+
+    @Override
+    public void onBackPressed(){
         alert.show();
     }
 
     @Override
     protected void onRestart(){
-        Toast toast = Toast.makeText(this, "Byeeee", Toast.LENGTH_SHORT);
-        toast.show();
         initCountDownTimer(timeRemaining);
         super.onRestart();
     }
+
+    @Override
+    protected void onPause(){
+        countDownTimer.cancel();
+        super.onPause();
+    }
+
 
     public void initCountDownTimer(long time){
         countDownTimer = new CountDownTimer(time, 1000) {
@@ -220,6 +233,7 @@ public class Test extends AppCompatActivity {
         dbHandler.addTest(score);
         dbHandler.addTestQuestions(testQuestions);
         int testId = dbHandler.getTestSize();
+        alert.cancel();
         Intent i = new Intent(this, ItemsList.class);
         i.putExtra("testId", testId);
         i.putExtra("code", "test_questions");

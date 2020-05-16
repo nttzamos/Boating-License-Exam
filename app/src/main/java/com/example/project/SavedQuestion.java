@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 public class SavedQuestion extends AppCompatActivity {
 
     private int savedQuestionId;
@@ -19,6 +21,8 @@ public class SavedQuestion extends AppCompatActivity {
     TextView choice1;
     TextView choice2;
     TextView choice3;
+    FloatingActionButton delete;
+    boolean deleted;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +44,31 @@ public class SavedQuestion extends AppCompatActivity {
         choice2.setText(savedQuestion.getChoice_2());
         choice3.setText(savedQuestion.getChoice_3());
         choice1.setBackgroundResource(R.drawable.correction);
+
+        delete = findViewById(R.id.delete);
+        deleted = false;
     }
 
     public void delete(View view) {
-        MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
-        dbHandler.deleteSaved(savedQuestionId);
-        finish();
+//        MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
+//        dbHandler.deleteSaved(savedQuestionId);
+//        finish();
+        if (!deleted) {
+            delete.setImageResource(R.drawable.custom_save);
+            deleted = true;
+        }
+        else {
+            delete.setImageResource(R.drawable.custom_delete);
+            deleted = false;
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (deleted) {
+            MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
+            dbHandler.deleteSaved(savedQuestionId);
+        }
+        super.onBackPressed();
     }
 }
