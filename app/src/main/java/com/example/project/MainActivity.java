@@ -26,8 +26,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goToTestsList(View view){
-        Intent i = new Intent(this, ItemsList.class);
-        i.putExtra("code", "tests_list");
+        Intent i = new Intent(this, TestsList.class);
         startActivity(i);
     }
 
@@ -37,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goToSaved(View view){
-        Intent i = new Intent(this, ItemsList.class);
+        Intent i = new Intent(this, QuestionsList.class);
         i.putExtra("code", "saved_questions");
         startActivity(i);
     }

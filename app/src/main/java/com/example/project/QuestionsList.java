@@ -10,8 +10,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class ItemsList extends AppCompatActivity implements Adapter.OnQuestionListener {
+public class QuestionsList extends AppCompatActivity implements QuestionsAdapter.OnQuestionListener {
     private ArrayList<String> questions;
+    private ArrayList<Integer> tests;
     private ArrayList<Integer> savedQuestions;
     private ArrayList<Boolean> trueOrFalse;
     private int testId;
@@ -25,12 +26,13 @@ public class ItemsList extends AppCompatActivity implements Adapter.OnQuestionLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_items_list);
+        setContentView(R.layout.activity_questions_list);
     }
 
     @Override
     public void onResume() {
         System.out.println("Resumed");
+        tests = new ArrayList<>();
         questions = new ArrayList<>();
         savedQuestions = new ArrayList<>();
         trueOrFalse = new ArrayList<>();
@@ -92,16 +94,14 @@ public class ItemsList extends AppCompatActivity implements Adapter.OnQuestionLi
             message3.setText("" + testsSize);
             int[][] tests = new int[testsSize][2];
             tests = dbHandler.getTests();;
-            for (int i=0; i<testsSize; i++){
-                questions.add("" + tests[i][1]);
-                trueOrFalse.add(true);
-            }
+            for (int i=0; i<testsSize; i++)
+                this.tests.add(tests[i][1]);
         }
         initRecyclerView();
     }
     private void initRecyclerView(){
         RecyclerView recyclerView= findViewById(R.id.recycler_view);
-        Adapter adapter = new Adapter(questions, trueOrFalse, code,this,this);
+        QuestionsAdapter adapter = new QuestionsAdapter(questions, trueOrFalse, code, this, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
@@ -121,7 +121,7 @@ public class ItemsList extends AppCompatActivity implements Adapter.OnQuestionLi
             startActivity(i);
         }
         else if (code.equals("tests_list")) {
-            Intent i = new Intent(this, ItemsList.class);
+            Intent i = new Intent(this, QuestionsList.class);
             i.putExtra("testId", questionId + 1);
             i.putExtra("code", "previous_attempts");
             startActivity(i);

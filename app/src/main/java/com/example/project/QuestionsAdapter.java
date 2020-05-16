@@ -5,25 +5,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
-public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
-    private ArrayList<String> mQuestion;
-    private ArrayList<Boolean> mTrueOrFalse;
-    private Context mContext;
-    private OnQuestionListener mOnQuestionListener;
+public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.ViewHolder> {
+    private ArrayList<String> question;
+    private ArrayList<Boolean> trueOrFalse;
+    private Context context;
+    private OnQuestionListener onQuestionListener;
     String code;
 
-    public Adapter(ArrayList<String> question, ArrayList<Boolean> trueOrFalse, String code, Context mContext, OnQuestionListener onQuestionListener) {
-        mQuestion = question;
-        mTrueOrFalse = trueOrFalse;
+    public QuestionsAdapter(ArrayList<String> question, ArrayList<Boolean> trueOrFalse, String code, Context mContext, OnQuestionListener onQuestionListener) {
+        this.question = question;
+        this.trueOrFalse = trueOrFalse;
         this.code = code;
-        this.mContext = mContext;
-        this.mOnQuestionListener = onQuestionListener;
+        this.context = mContext;
+        this.onQuestionListener = onQuestionListener;
     }
 
     @NonNull
@@ -31,39 +31,40 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
         if (code.equals("tests_list"))
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.one_test, parent, false);
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.test_new, parent, false);
         else view = LayoutInflater.from(parent.getContext()).inflate(R.layout.question_new, parent, false);
-        return new ViewHolder(view, mOnQuestionListener);
+        return new ViewHolder(view, onQuestionListener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         if (!code.equals("tests_list") && !code.equals("saved_questions")) {
-            if (mTrueOrFalse.get(position))
+            if (trueOrFalse.get(position))
                 holder.trueOrFalse.setImageResource(R.drawable.custom_correct);
             else holder.trueOrFalse.setImageResource(R.drawable.custom_wrong);
         }
 
-        if(mQuestion.get(position).length()<95)
-            holder.question.setText(mQuestion.get(position));
+        if(question.get(position).length()<95)
+            holder.question.setText(question.get(position));
         else
-            holder.question.setText(mQuestion.get(position).substring(0,85)+"...");
+            holder.question.setText(question.get(position).substring(0,85)+"...");
 
-        if (code.equals("tests_list"))
+        if (code.equals("tests_list")) {
             holder.title.setText("Τεστ "+ (position+1));
+        }
         else holder.title.setText("Ερώτηση "+ (position+1));
     }
 
     @Override
     public int getItemCount() {
-        return mQuestion.size();
+        return question.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView trueOrFalse;
         TextView question;
         TextView title;
-        RelativeLayout parentLayout;
+        ConstraintLayout parentLayout;
         OnQuestionListener onQuestionListener;
 
         public ViewHolder(@NonNull View itemView, OnQuestionListener onQuestionListener) {
@@ -71,7 +72,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             trueOrFalse = itemView.findViewById(R.id.trueOrFalse);
             question = itemView.findViewById(R.id.question);
             title = itemView.findViewById(R.id.title);
-            parentLayout = itemView.findViewById(R.id.relativeLayout);
+            parentLayout = itemView.findViewById(R.id.constraint);
             this.onQuestionListener = onQuestionListener;
             itemView.setOnClickListener(this);
         }

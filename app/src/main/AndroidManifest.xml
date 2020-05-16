@@ -9,11 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ItemsList" />
+        <activity android:name=".TestsList"></activity>
+        <activity android:name=".QuestionsList" />
         <activity android:name=".TestQuestion" />
-        <activity android:name=".SavedQuestion" android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".SavedQuestion"
+            android:configChanges="orientation|screenSize" />
         <activity android:name=".TestScores" />
-        <activity android:name=".Test" android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".Test"
+            android:configChanges="orientation|screenSize" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

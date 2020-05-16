@@ -234,7 +234,7 @@ public class Test extends AppCompatActivity {
         dbHandler.addTestQuestions(testQuestions);
         int testId = dbHandler.getTestSize();
         alert.cancel();
-        Intent i = new Intent(this, ItemsList.class);
+        Intent i = new Intent(this, QuestionsList.class);
         i.putExtra("testId", testId);
         i.putExtra("code", "test_questions");
         startActivity(i);
