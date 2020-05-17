@@ -10,7 +10,21 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import android.app.DownloadManager;
+import android.content.Context;
+import android.net.Uri;
+
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import static android.os.Environment.DIRECTORY_DOWNLOADS;
+
 public class MainActivity extends AppCompatActivity {
+
+    FirebaseStorage firebaseStorage;
+    StorageReference storageReference;
+    StorageReference material;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +37,10 @@ public class MainActivity extends AppCompatActivity {
     public void goToTest(View view){
         Intent i = new Intent(this, Test.class);
         startActivity(i);
+    }
+
+    public void goToTheory(View view){
+        startDownloading();
     }
 
     public void goToTestsList(View view){
@@ -85,4 +103,24 @@ public class MainActivity extends AppCompatActivity {
         System.out.print("Done");
     }
 
+    private void startDownloading(){
+        storageReference = firebaseStorage.getInstance().getReference();
+        material = storageReference.child("theory.pdf");
+        material.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                String url=uri.toString();
+                downloadFile(MainActivity.this,"Ύλη Εξέτασης - Δίπλωμα Ταχυπλόου Σκάφους'",".pdf",DIRECTORY_DOWNLOADS, url);
+            }
+        });
+    }
+
+    private void downloadFile(Context context, String fileName, String fileExtension, String destinationDirectory, String url){
+        DownloadManager downloadManager = (DownloadManager) getSystemService(context.DOWNLOAD_SERVICE);
+        Uri uri = Uri.parse(url);
+        DownloadManager.Request request = new DownloadManager.Request(uri);
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        request.setDestinationInExternalFilesDir(this, DIRECTORY_DOWNLOADS, fileName+fileExtension);
+        downloadManager.enqueue(request);
+    }
 }

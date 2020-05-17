@@ -131,6 +131,7 @@
                 android:text="Button"
                 android:textAllCaps="false"
                 android:background="@drawable/choice"
+                android:foreground="?attr/selectableItemBackground"
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="6dp"/>
 
@@ -143,6 +144,7 @@
                 android:text="Button"
                 android:textAllCaps="false"
                 android:background="@drawable/choice"
+                android:foreground="?attr/selectableItemBackground"
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="6dp"/>
 
@@ -155,6 +157,7 @@
                 android:text="Button"
                 android:textAllCaps="false"
                 android:background="@drawable/choice"
+                android:foreground="?attr/selectableItemBackground"
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="6dp"/>
         </LinearLayout>
@@ -167,6 +170,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/choice"
+            android:foreground="?attr/selectableItemBackground"
             android:onClick="previous"
             android:text="previous"
             app:layout_constraintHorizontal_bias="0.5"
@@ -184,6 +188,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/choice"
+            android:foreground="?attr/selectableItemBackground"
             android:backgroundTint="@color/colorPrimary"
             android:onClick="next"
             android:text="next"
