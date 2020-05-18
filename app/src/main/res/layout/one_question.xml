@@ -33,6 +33,5 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:src="@drawable/checkbox" />
+        android:layout_alignParentTop="true" />
 </RelativeLayout>

@@ -4,15 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import android.view.View;
 
 import java.io.BufferedReader;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 import android.app.DownloadManager;
 import android.content.Context;
 import android.net.Uri;
+
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -22,9 +25,7 @@ import static android.os.Environment.DIRECTORY_DOWNLOADS;
 
 public class MainActivity extends AppCompatActivity {
 
-    FirebaseStorage firebaseStorage;
     StorageReference storageReference;
-    StorageReference material;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,13 +105,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startDownloading(){
-        storageReference = firebaseStorage.getInstance().getReference();
-        material = storageReference.child("theory.pdf");
-        material.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        storageReference = FirebaseStorage.getInstance().getReference();
+        storageReference.child("theory.pdf").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 String url=uri.toString();
-                downloadFile(MainActivity.this,"Ύλη Εξέτασης - Δίπλωμα Ταχυπλόου Σκάφους'",".pdf",DIRECTORY_DOWNLOADS, url);
+                downloadFile(MainActivity.this,"Ύλη Εξέτασης - Δίπλωμα Ταχυπλόου Σκάφους",".pdf",DIRECTORY_DOWNLOADS, url);
             }
         });
     }
