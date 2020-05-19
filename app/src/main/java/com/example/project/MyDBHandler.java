@@ -125,6 +125,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         while (cursor.moveToFirst()){
             db.delete(TABLE_QUESTIONS, )
         }*/
+        db.close();
     }
 
     private void addSQLEntries(SQLiteDatabase db){
@@ -195,7 +196,9 @@ public class MyDBHandler extends SQLiteOpenHelper {
         String query = "SELECT * FROM " + TABLE_QUESTIONS;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
+
         System.out.println("The number of questions in the database is " + cursor.getCount());
+        db.close();
         return cursor.getCount();
     }
 
@@ -214,6 +217,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         System.out.println("The number of tests taken already is :" + cursor.getCount());
+        db.close();
         return cursor.getCount();
     }
 
@@ -230,6 +234,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
             tests[i][0] = Integer.parseInt(cursor.getString(0));
             tests[i++][1] = Integer.parseInt(cursor.getString(1));
         }
+        db.close();
         return tests;
     }
 
@@ -239,6 +244,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         cursor.moveToFirst();
+        db.close();
         return Integer.parseInt(cursor.getString(0));
     }
 
@@ -269,7 +275,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
             tmp7 = cursor.getString(6);
             questions[i] = new QuestionDB(tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8);
         }
-
+        db.close();
         return questions;
     }
 
@@ -323,6 +329,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
             tmp7 = cursor.getString(6);
             questions[i++] = new QuestionDB(tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8 );
         }
+        db.close();
         return questions;
     }
 
@@ -338,12 +345,13 @@ public class MyDBHandler extends SQLiteOpenHelper {
      */
     public void initCurrentSavedId(){
         String selectQuery = "SELECT MAX(" + TABLE_SAVED_QUESTIONS + "." + COLUMN_ID +  ") FROM " +  TABLE_SAVED_QUESTIONS;
-        SQLiteDatabase database = this.getWritableDatabase();
-        Cursor cursor = database.rawQuery(selectQuery, null);
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor.moveToFirst() && cursor.getString(0) != null )
             currentSavedId = Integer.parseInt(cursor.getString(0)) + 1;
         else currentSavedId = 1;
         System.out.println("Maximum plus 1 is : " + currentSavedId );
+        db.close();
     }
 
     public QuestionDB getSavedById(int savedQuestionId){
@@ -363,12 +371,14 @@ public class MyDBHandler extends SQLiteOpenHelper {
         tmp6 = cursor.getString(5);
         tmp7 = cursor.getString(6);
         QuestionDB question = new QuestionDB(tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8 );
+        db.close();
         return question;
     }
 
     public void deleteSaved(int savedQuestionId){
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_SAVED_QUESTIONS, COLUMN_QUESTION_ID + " =?", new String[]{Integer.toString(savedQuestionId)});
+        db.close();
     }
 
     public int getSavedSize(){
@@ -376,6 +386,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         System.out.println("The number of questions saved is : " + cursor.getCount());
+        db.close();
         return cursor.getCount();
     }
 
@@ -404,6 +415,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
                 COLUMN_TEST_ID + " = " + testId;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
+        db.close();
         return cursor.getCount();
     }
 
@@ -438,6 +450,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
             tmp5 = cursor.getString(4);
             questions[i++] = new TestQuestionDB(tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7);
         } while (cursor.moveToNext());
+        db.close();
         return questions;
     }
 }

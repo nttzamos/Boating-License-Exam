@@ -98,9 +98,10 @@ public class Test extends AppCompatActivity {
 
     private void setDialog() {
         builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
-        builder.setTitle("Warning!!");
-        builder.setMessage("Are you sure you want to exit? The test will be deleted.");
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        builder.setTitle("Προσοχή");
+
+        builder.setMessage("Είστε σίγουροι οτι θέλετε να εξέλθετε; Το τεστ θα τερματιστεί.");
+        builder.setPositiveButton("Ναι", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
@@ -108,7 +109,7 @@ public class Test extends AppCompatActivity {
                 countDownTimer.cancel();
             }
         });
-        builder.setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Ακυρο",new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
@@ -146,7 +147,7 @@ public class Test extends AppCompatActivity {
             }
 
             public void  onFinish() {
-                timer.setText("Stop!");
+                timer.setText("00:00");
                 end();
             }
         }.start();
@@ -221,14 +222,13 @@ public class Test extends AppCompatActivity {
         boolean tmp = dbHandler.addSaved(savedDB);
         String text;
         if (tmp)
-            text = "Question saved successfully";
-        else text = "Question has already been saved";
+            text = "Η ερώτηση αποθηκεύτηκε επιτυχώς.";
+        else text = "Η ερώτηση έχει αποθηκευτεί ήδη.";
         Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
         toast.show();
     }
 
     public void end(){
-        question.setText("Test finished with score " + score);
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
         dbHandler.addTest(score);
         dbHandler.addTestQuestions(testQuestions);

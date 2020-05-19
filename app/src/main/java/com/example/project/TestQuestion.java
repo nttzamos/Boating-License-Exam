@@ -12,6 +12,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class TestQuestion extends AppCompatActivity {
 
+    TextView title;
     TextView question;
     TextView timer;
     TextView counter;
@@ -22,6 +23,7 @@ public class TestQuestion extends AppCompatActivity {
     Button next;
     FloatingActionButton save;
 
+    private String code;
     private int testId;
     private int current;
     private TestQuestionDB[] questions;
@@ -31,8 +33,15 @@ public class TestQuestion extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_question);
 
+        title = findViewById(R.id.title);
+
         testId = getIntent().getIntExtra("testId", 0);
         current = getIntent().getIntExtra("testQuestionId", 0) - 1;
+        code = getIntent().getStringExtra("code");
+        if (code.equals("previous_attempts"))
+            title.setText("Προηγούμενες Προσπάθειες");
+        else if (code.equals("test_questions"))
+            title.setText("Αποτελέσματα");
 
         question = findViewById(R.id.question);
         timer = findViewById(R.id.timer);

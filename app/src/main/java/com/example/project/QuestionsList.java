@@ -55,16 +55,16 @@ public class QuestionsList extends AppCompatActivity implements QuestionsAdapter
             int testScore = dbHandler.getTestScore(testId);
             if (testScore < 19) {
                 linear.setBackgroundColor(getResources().getColor(R.color.reddish));
-                message1.setText("You did not pass the test :(");
-                message2.setText("Your score was :");
-                message3.setText(testScore + "/20");
+                message2.setText("Επιτύχατε στο Τεστ!");
             }
             else {
                 linear.setBackgroundColor(getResources().getColor(R.color.greenish));
-                message1.setText("You passed the test :)");
-                message2.setText("Your score was :");
-                message3.setText(testScore + "/20");
+                message2.setText("Αποτύχατε στο Τεστ.");
             }
+            if (code.equals("test_questions"))
+                message1.setText("Αποτελέσματα");
+            else message1.setText("Προηγούμενες Προσπάθειες");
+            message3.setText("Το σκορ σας ήταν: " + testScore + "/20");
             TestQuestionDB[] questionsDB;
             questionsDB = dbHandler.getPreviousTestQuestions(testId);
             for (int i = 0; i < 20; i++) {
@@ -74,8 +74,8 @@ public class QuestionsList extends AppCompatActivity implements QuestionsAdapter
         }
         else if (code.equals("saved_questions")) {
             int savedSize = dbHandler.getSavedSize();
-            message1.setText("These are your saved questions");
-            message2.setText("Number of questions saved :");
+            message1.setText("Αποθηκευμένες Ερωτήσεις");
+            message2.setText("Αριθμός Αποθηκυμένων Ερωτήσεων:");
             message3.setText("" + savedSize);
             if (savedSize > 0) {
                 QuestionDB[] saved = new QuestionDB[savedSize];
@@ -87,16 +87,7 @@ public class QuestionsList extends AppCompatActivity implements QuestionsAdapter
                 }
             }
         }
-        else if (code.equals("tests_list")) {
-            int testsSize = dbHandler.getTestSize();
-            message1.setText("These are your previous attempts");
-            message2.setText("Number of tests taken :");
-            message3.setText("" + testsSize);
-            int[][] tests = new int[testsSize][2];
-            tests = dbHandler.getTests();;
-            for (int i=0; i<testsSize; i++)
-                this.tests.add(tests[i][1]);
-        }
+
         initRecyclerView();
     }
     private void initRecyclerView(){
@@ -112,18 +103,13 @@ public class QuestionsList extends AppCompatActivity implements QuestionsAdapter
             Intent i = new Intent(this, TestQuestion.class);
             i.putExtra("testQuestionId", questionId + 1);
             i.putExtra("testId", testId);
+            i.putExtra("code", code);
             System.out.println("pos : " + questionId + " , test : " + testId);
             startActivity(i);
         }
         else if (code.equals("saved_questions")) {
             Intent i = new Intent(this, SavedQuestion.class);
             i.putExtra("savedQuestionId", savedQuestions.get(questionId) );
-            startActivity(i);
-        }
-        else if (code.equals("tests_list")) {
-            Intent i = new Intent(this, QuestionsList.class);
-            i.putExtra("testId", questionId + 1);
-            i.putExtra("code", "previous_attempts");
             startActivity(i);
         }
 

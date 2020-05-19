@@ -41,8 +41,8 @@ public class TestsList extends AppCompatActivity implements TestsAdapter.OnQuest
     private void initQuestions(){
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
         int testsSize = dbHandler.getTestSize();
-        message1.setText("These are your previous attempts");
-        message2.setText("Number of tests taken :");
+        message1.setText("Προηγούμενες Προσπάθειες");
+        message2.setText("Αριθμός Τεστ :");
         message3.setText("" + testsSize);
         int[][] tests = new int[testsSize][2];
         tests = dbHandler.getTests();;
