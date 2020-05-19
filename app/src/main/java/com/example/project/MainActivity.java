@@ -1,7 +1,9 @@
 package com.example.project;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -25,7 +27,9 @@ import static android.os.Environment.DIRECTORY_DOWNLOADS;
 
 public class MainActivity extends AppCompatActivity {
 
-    StorageReference storageReference;
+    AlertDialog.Builder builder;
+    AlertDialog alert;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +45,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goToTheory(View view){
-        startDownloading();
+        builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
+        builder.setTitle("Λήψη Ύλης");
+        builder.setMessage("Είστε σίγουροι ότι θέλετε να κατεβάσετε την ύλη;\n" +
+                "Απαιτείται σύνδεση στο Internet για να ολοκληρωθεί η λήψη.");
+        builder.setPositiveButton("Ναι", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                startDownloading();
+                dialog.cancel();
+
+            }
+        });
+        builder.setNegativeButton("Ακυρο",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        alert = builder.create();
+        alert.show();
+//        startDownloading();
     }
 
     public void goToTestsList(View view){
@@ -105,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startDownloading(){
+        StorageReference storageReference;
         storageReference = FirebaseStorage.getInstance().getReference();
         storageReference.child("theory.pdf").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
