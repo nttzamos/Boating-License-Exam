@@ -51,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Κάνε το τεστ"
+                android:text="@string/menu_test"
                 android:textColor="@color/blackish"
                 android:textSize="22sp"
                 android:textStyle="bold"/>
@@ -79,7 +79,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Κατέβασε την ύλη"
+                android:text="@string/menu_theory"
                 android:textColor="@color/blackish"
                 android:textSize="22sp"
                 android:textStyle="bold"/>
@@ -107,7 +107,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Προηγούμενες Προσπάθειες"
+                android:text="@string/menu_previous_attempts"
                 android:textColor="@color/blackish"
                 android:textSize="22sp"
                 android:textStyle="bold"/>
@@ -134,7 +134,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Βαθμολογία"
+                android:text="@string/menu_test_scores"
                 android:textColor="@color/blackish"
                 android:textSize="22sp"
                 android:textStyle="bold"/>
@@ -163,7 +163,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Αποθηκευμένες Ερωτήσεις"
+                android:text="@string/menu_saved_questions"
                 android:textColor="@color/blackish"
                 android:textSize="22sp"
                 android:textStyle="bold"/>

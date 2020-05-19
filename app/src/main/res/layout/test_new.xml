@@ -26,8 +26,8 @@
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView"
-                android:gravity="left"
+                android:text="@string/text_view"
+                android:gravity="start"
                 android:layout_weight="1"
                 android:textColor="@color/blackish"
                 android:textStyle="bold"
@@ -38,8 +38,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="right"
-                android:text="Επέτυχες"
+                android:gravity="end"
+                android:text="@string/text_view"
                 android:textColor="@color/blackish"
                 android:textSize="22sp" />
         </LinearLayout>
@@ -54,8 +54,8 @@
                 android:id="@+id/score_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Βαθμολογία"
-                android:gravity="left"
+                android:text="@string/menu_test_scores"
+                android:gravity="start"
                 android:layout_weight="1"
                 android:textColor="@color/blackish"
                 android:textStyle="bold"
@@ -66,8 +66,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="right"
-                android:text="19/20"
+                android:gravity="end"
+                android:text="@string/out_of_twenty"
                 android:textColor="@color/blackish"
                 android:textSize="18sp" />
         </LinearLayout>

@@ -24,7 +24,7 @@
             android:gravity="center"
             android:textStyle="bold"
             android:textColor="@color/blackish"
-            android:text="Επιτυχημένα: 15"/>
+            android:text="@string/successes"/>
 
         <TextView
             android:id="@+id/failure"
@@ -34,7 +34,7 @@
             android:gravity="center"
             android:textStyle="bold"
             android:textColor="@color/blackish"
-            android:text="Αποτυχημένα: 15"/>
+            android:text="@string/failures"/>
 
     </LinearLayout>
 
@@ -44,6 +44,6 @@
         android:layout_height="match_parent"
         app:layout_constraintTop_toBottomOf="@id/linear"
         android:layout_marginTop="24dp"
-        android:layout_marginRight="8dp"/>
+        android:layout_marginEnd="8dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -147,7 +147,7 @@ public class Test extends AppCompatActivity {
             }
 
             public void  onFinish() {
-                timer.setText("00:00");
+                timer.setText(getString(R.string.ending_time));
                 end();
             }
         }.start();
@@ -174,6 +174,7 @@ public class Test extends AppCompatActivity {
 
         if (move.size()==1){
             move.remove(0);
+            timer.setText(getString(R.string.ending_time));
             countDownTimer.cancel();
             end();
             return;
@@ -222,8 +223,8 @@ public class Test extends AppCompatActivity {
         boolean tmp = dbHandler.addSaved(savedDB);
         String text;
         if (tmp)
-            text = "Η ερώτηση αποθηκεύτηκε επιτυχώς.";
-        else text = "Η ερώτηση έχει αποθηκευτεί ήδη.";
+            text = getString(R.string.question_saved_successfully);
+        else text = getString(R.string.question_already_saved);
         Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
         toast.show();
     }

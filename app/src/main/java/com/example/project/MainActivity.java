@@ -46,10 +46,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void goToTheory(View view){
         builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
-        builder.setTitle("Λήψη Ύλης");
-        builder.setMessage("Είστε σίγουροι ότι θέλετε να κατεβάσετε την ύλη;\n" +
-                "Απαιτείται σύνδεση στο Internet για να ολοκληρωθεί η λήψη.");
-        builder.setPositiveButton("Ναι", new DialogInterface.OnClickListener() {
+        builder.setTitle(getString(R.string.download_title));
+        builder.setMessage(getString(R.string.download_message));
+        builder.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 startDownloading();
@@ -57,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        builder.setNegativeButton("Ακυρο",new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(getString(R.string.cancel),new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();

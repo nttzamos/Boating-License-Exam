@@ -19,19 +19,6 @@
             android:focusableInTouchMode="true"
             android:orientation="vertical">
 
-<!--            <TextView-->
-<!--                android:id="@+id/message1"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="8dp"-->
-<!--                android:text="Message"-->
-<!--                android:textColor="@android:color/white"-->
-<!--                android:textStyle="bold"-->
-<!--                android:textSize="26sp"-->
-<!--                android:textAlignment="center"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="parent"/>-->
-
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
@@ -45,7 +32,7 @@
                     android:id="@+id/message1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Προηγούμενες Προσπάθειες"
+                    android:text="@string/menu_previous_attempts"
                     android:gravity="center"
                     android:textColor="@color/blackish"
                     android:textSize="16sp"
@@ -59,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:textAlignment="center"
-                android:text="This is a longer sentence"
+                android:text="@string/number_of_tests"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
                 android:textSize="18sp"
@@ -73,7 +60,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="8dp"
                 android:textAlignment="center"
-                android:text="4/20"
+                android:text="@string/out_of_twenty"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
                 android:textSize="22sp"

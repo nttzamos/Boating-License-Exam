@@ -48,8 +48,8 @@ public class TestScores extends AppCompatActivity {
         succ = findViewById(R.id.success);
         fail = findViewById(R.id.failure);
 
-        succ.setText("Επιτυχημένα: " + success);
-        fail.setText("Αποτυχημένα: " + failure);
+        succ.setText(getString(R.string.successes) + " " + success);
+        fail.setText(getString(R.string.failures) + " " + failure);
 
         graph.addSeries(series);
         graph.getViewport().setXAxisBoundsManual(true);

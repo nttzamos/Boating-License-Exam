@@ -30,15 +30,13 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
-        if (code.equals("tests_list"))
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.test_new, parent, false);
-        else view = LayoutInflater.from(parent.getContext()).inflate(R.layout.question_new, parent, false);
+        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.question_new, parent, false);
         return new ViewHolder(view, onQuestionListener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        if (!code.equals("tests_list") && !code.equals("saved_questions")) {
+        if (!code.equals("saved_questions")) {
             if (trueOrFalse.get(position))
                 holder.trueOrFalse.setImageResource(R.drawable.custom_correct);
             else holder.trueOrFalse.setImageResource(R.drawable.custom_wrong);
@@ -49,10 +47,8 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
         else
             holder.question.setText(question.get(position).substring(0,85)+"...");
 
-        if (code.equals("tests_list")) {
-            holder.title.setText("Τεστ "+ (position+1));
-        }
-        else holder.title.setText("Ερώτηση "+ (position+1));
+
+        holder.title.setText("Ερώτηση " + (position+1));
     }
 
     @Override

@@ -12,8 +12,6 @@ import java.util.ArrayList;
 
 public class QuestionsList extends AppCompatActivity implements QuestionsAdapter.OnQuestionListener {
     private ArrayList<String> questions;
-    private ArrayList<Integer> tests;
-    private ArrayList<Integer> savedQuestions;
     private ArrayList<Boolean> trueOrFalse;
     private int testId;
     private String code;
@@ -32,9 +30,7 @@ public class QuestionsList extends AppCompatActivity implements QuestionsAdapter
     @Override
     public void onResume() {
         System.out.println("Resumed");
-        tests = new ArrayList<>();
         questions = new ArrayList<>();
-        savedQuestions = new ArrayList<>();
         trueOrFalse = new ArrayList<>();
 
         message1 = findViewById(R.id.message1);
@@ -55,33 +51,32 @@ public class QuestionsList extends AppCompatActivity implements QuestionsAdapter
             int testScore = dbHandler.getTestScore(testId);
             if (testScore < 19) {
                 linear.setBackgroundColor(getResources().getColor(R.color.reddish));
-                message2.setText("Επιτύχατε στο Τεστ!");
+                message2.setText(getString(R.string.failure_message));
             }
             else {
                 linear.setBackgroundColor(getResources().getColor(R.color.greenish));
-                message2.setText("Αποτύχατε στο Τεστ.");
+                message2.setText(getString(R.string.success_message));
             }
             if (code.equals("test_questions"))
-                message1.setText("Αποτελέσματα");
-            else message1.setText("Προηγούμενες Προσπάθειες");
-            message3.setText("Το σκορ σας ήταν: " + testScore + "/20");
+                message1.setText(getString(R.string.results));
+            else message1.setText(getString(R.string.menu_previous_attempts));
+            message3.setText(getString(R.string.your_score_was) + testScore + "/20");
             TestQuestionDB[] questionsDB;
             questionsDB = dbHandler.getPreviousTestQuestions(testId);
             for (int i = 0; i < 20; i++) {
                 questions.add(questionsDB[i].getQuestion());
-                trueOrFalse.add(questionsDB[i].getAnswer() == questionsDB[i].getCorrect_answer() ? true : false);
+                trueOrFalse.add(questionsDB[i].getAnswer() == questionsDB[i].getCorrect_answer());
             }
         }
         else if (code.equals("saved_questions")) {
             int savedSize = dbHandler.getSavedSize();
-            message1.setText("Αποθηκευμένες Ερωτήσεις");
-            message2.setText("Αριθμός Αποθηκυμένων Ερωτήσεων:");
+            message1.setText(getString(R.string.menu_saved_questions));
+            message2.setText(getString(R.string.number_of_saved_questions));
             message3.setText("" + savedSize);
             if (savedSize > 0) {
                 QuestionDB[] saved = new QuestionDB[savedSize];
                 saved = dbHandler.getSaved();
                 for (int i = 0; i < savedSize; i++) {
-                    savedQuestions.add(saved[i].get_id());
                     questions.add(saved[i].getQuestion());
                     trueOrFalse.add(true);
                 }
@@ -109,7 +104,8 @@ public class QuestionsList extends AppCompatActivity implements QuestionsAdapter
         }
         else if (code.equals("saved_questions")) {
             Intent i = new Intent(this, SavedQuestion.class);
-            i.putExtra("savedQuestionId", savedQuestions.get(questionId) );
+            //i.putExtra("savedQuestionId", savedQuestions.get(questionId) );
+            i.putExtra("savedQuestionPosition", questionId);
             startActivity(i);
         }
 

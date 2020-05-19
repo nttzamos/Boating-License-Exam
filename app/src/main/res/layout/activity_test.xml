@@ -27,7 +27,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Δίπλωμα Ταχυπλόου Σκάφους"
+                android:text="@string/simulation"
                 android:gravity="center"
                 android:textColor="@color/blackish"
                 android:textSize="16sp"
@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 android:layout_marginHorizontal="16dp"
-                android:text="TextView"
+                android:text="@string/text_view"
                 android:textColor="@android:color/black"
                 android:textAlignment="center"/>
 
@@ -67,7 +67,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="1/20"
+                    android:text="@string/out_of_twenty"
                     android:textColor="@color/blackish"
                     android:gravity="center"
                     android:textSize="20sp" />
@@ -77,7 +77,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="20:00"
+                    android:text="@string/starting_time"
                     android:textColor="@color/blackish"
                     android:gravity="center"
                     android:textSize="20sp"/>
@@ -104,6 +104,7 @@
             app:layout_constraintBottom_toBottomOf="@id/linear1"
             app:layout_constraintEnd_toEndOf="parent"
             android:clickable="true"
+            android:focusable="true"
             app:srcCompat="@drawable/custom_save"/>
 
         <LinearLayout
@@ -123,7 +124,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:onClick="choice1"
-                android:text="Button"
+                android:text="@string/button"
                 android:textAllCaps="false"
                 android:background="@drawable/choice"
                 android:foreground="?attr/selectableItemBackground"
@@ -136,7 +137,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:onClick="choice2"
-                android:text="Button"
+                android:text="@string/button"
                 android:textAllCaps="false"
                 android:background="@drawable/choice"
                 android:foreground="?attr/selectableItemBackground"
@@ -149,7 +150,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:onClick="choice3"
-                android:text="Button"
+                android:text="@string/button"
                 android:textAllCaps="false"
                 android:background="@drawable/choice"
                 android:foreground="?attr/selectableItemBackground"
@@ -167,7 +168,7 @@
             android:background="@drawable/choice"
             android:foreground="?attr/selectableItemBackground"
             android:onClick="previous"
-            android:text="previous"
+            android:text="@string/previous"
             app:layout_constraintHorizontal_bias="0.5"
             android:backgroundTint="@color/colorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -186,7 +187,7 @@
             android:foreground="?attr/selectableItemBackground"
             android:backgroundTint="@color/colorPrimary"
             android:onClick="next"
-            android:text="next"
+            android:text="@string/next"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

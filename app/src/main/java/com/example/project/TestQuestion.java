@@ -39,9 +39,9 @@ public class TestQuestion extends AppCompatActivity {
         current = getIntent().getIntExtra("testQuestionId", 0) - 1;
         code = getIntent().getStringExtra("code");
         if (code.equals("previous_attempts"))
-            title.setText("Προηγούμενες Προσπάθειες");
+            title.setText(getString(R.string.menu_previous_attempts));
         else if (code.equals("test_questions"))
-            title.setText("Αποτελέσματα");
+            title.setText(getString(R.string.results));
 
         question = findViewById(R.id.question);
         timer = findViewById(R.id.timer);
@@ -96,8 +96,8 @@ public class TestQuestion extends AppCompatActivity {
         boolean tmp = dbHandler.addSaved(savedDB);
         String text;
         if (tmp)
-            text = "Question saved successfully";
-        else text = "Question has already been saved";
+            text = getString(R.string.question_saved_successfully);
+        else text = getString(R.string.question_already_saved);
         Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
         toast.show();
     }
