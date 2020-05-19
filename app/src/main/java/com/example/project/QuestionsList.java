@@ -36,7 +36,7 @@ public class QuestionsList extends AppCompatActivity implements QuestionsAdapter
         message1 = findViewById(R.id.message1);
         message2 = findViewById(R.id.message2);
         message3 = findViewById(R.id.message3);
-        linear = findViewById(R.id.linear);
+        linear = findViewById(R.id.linear2);
 
         code = getIntent().getStringExtra("code");
         if (code.equals("test_questions") || code.equals("previous_attempts"))
@@ -50,11 +50,11 @@ public class QuestionsList extends AppCompatActivity implements QuestionsAdapter
         if (code.equals("test_questions") || code.equals("previous_attempts")) {
             int testScore = dbHandler.getTestScore(testId);
             if (testScore < 19) {
-                linear.setBackgroundColor(getResources().getColor(R.color.reddish));
+                linear.setBackgroundResource(R.drawable.false_item);
                 message2.setText(getString(R.string.failure_message));
             }
             else {
-                linear.setBackgroundColor(getResources().getColor(R.color.greenish));
+                linear.setBackgroundResource(R.drawable.correct_item);;
                 message2.setText(getString(R.string.success_message));
             }
             if (code.equals("test_questions"))

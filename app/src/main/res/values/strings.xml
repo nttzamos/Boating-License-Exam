@@ -2,8 +2,7 @@
     <string name="app_name">Δίπλωμα Ταχυπλόου Σκάφους</string>
 
     <string name="download_title">Λήψη Ύλης</string>
-    <string name="download_message">Είστε σίγουροι ότι θέλετε να κατεβάσετε την ύλη;\n" +
-                "Απαιτείται σύνδεση στο Internet για να ολοκληρωθεί η λήψη.</string>
+    <string name="download_message">Είστε σίγουροι ότι θέλετε να κατεβάσετε την ύλη;\nΑπαιτείται σύνδεση στο Internet για να ολοκληρωθεί η λήψη.</string>
 
     <string name="yes">Ναι</string>
     <string name="cancel">Ακυρο</string>
@@ -46,7 +45,7 @@
     <string name="test">Τεστ</string>
 
 
-    <string name="your_score_was">Το σκορ σας ήταν</string>
+    <string name="your_score_was">"Το σκορ σας ήταν "</string>
 
     <string name="question_saved_successfully">Η ερώτηση αποθηκεύτηκε επιτυχώς.</string>
     <string name="question_already_saved">Η ερώτηση έχει αποθηκευτεί ήδη.</string>
