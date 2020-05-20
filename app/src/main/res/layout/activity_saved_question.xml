@@ -28,7 +28,7 @@
                 android:text="@string/menu_saved_questions"
                 android:gravity="center"
                 android:textColor="@color/blackish"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textStyle="bold"/>
 
         </androidx.appcompat.widget.Toolbar>

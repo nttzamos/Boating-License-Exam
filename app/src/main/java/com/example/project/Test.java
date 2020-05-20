@@ -174,7 +174,6 @@ public class Test extends AppCompatActivity {
 
         if (move.size()==1){
             move.remove(0);
-            timer.setText(getString(R.string.ending_time));
             countDownTimer.cancel();
             end();
             return;

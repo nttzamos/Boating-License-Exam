@@ -16,7 +16,6 @@ public class TestsList extends AppCompatActivity implements TestsAdapter.OnQuest
     private TextView message1;
     private TextView message2;
     private TextView message3;
-    private LinearLayout linear;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +31,6 @@ public class TestsList extends AppCompatActivity implements TestsAdapter.OnQuest
         message1 = findViewById(R.id.message1);
         message2 = findViewById(R.id.message2);
         message3 = findViewById(R.id.message3);
-        linear = findViewById(R.id.linear);
 
         initQuestions();
         super.onResume();

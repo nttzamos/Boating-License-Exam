@@ -2,7 +2,7 @@
     <string name="app_name">Δίπλωμα Ταχυπλόου Σκάφους</string>
 
     <string name="download_title">Λήψη Ύλης</string>
-    <string name="download_message">Είστε σίγουροι ότι θέλετε να κατεβάσετε την ύλη;\nΑπαιτείται σύνδεση στο Internet για να ολοκληρωθεί η λήψη.</string>
+    <string name="download_message">Είστε σίγουροι ότι θέλετε να κατεβάσετε την ύλη; Απαιτείται σύνδεση στο Internet για να ολοκληρωθεί η λήψη.</string>
 
     <string name="yes">Ναι</string>
     <string name="cancel">Ακυρο</string>
@@ -10,7 +10,7 @@
 
 
 
-    <string name="menu_test">Κάνε το τεστ</string>
+    <string name="menu_test_simulation">Προσομοίωση Εξέτασης</string>
     <string name="menu_theory">Κατέβασε την ύλη</string>
     <string name="menu_previous_attempts">Προηγούμενες Προσπάθειες</string>
     <string name="menu_test_scores">Βαθμολογία</string>
@@ -28,7 +28,6 @@
     <string name="previous">Προηγουμενη</string>
     <string name="next">Επομενη</string>
 
-    <string name="simulation">Προσομοίωση Εξέτασης</string>
     <string name="starting_time">20:00</string>
     <string name="ending_time">00:00</string>
 
@@ -36,8 +35,8 @@
     <string name="successes">Επιτυχημένα:</string>
     <string name="failures">Αποτυχημένα:</string>
 
-    <string name="number_of_tests">Αριθμός Τεστ:</string>
-    <string name="number_of_saved_questions">Αριθμός Αποθηκευμένων Ερωτήσεων:</string>
+    <string name="number_of_tests">Αριθμός Τεστ</string>
+    <string name="number_of_saved_questions">Αριθμός Αποθηκευμένων Ερωτήσεων</string>
 
     <string name="sentence_dummy">This is a long sentence.</string>
 

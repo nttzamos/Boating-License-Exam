@@ -25,7 +25,7 @@ public class TestsAdapter extends RecyclerView.Adapter<TestsAdapter.ViewHolder> 
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
-        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.test_new, parent, false);
+        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.test_item, parent, false);
         return new ViewHolder(view, onQuestionListener);
     }
 
