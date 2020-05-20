@@ -5,7 +5,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -16,10 +15,8 @@ public class QuestionsList extends AppCompatActivity implements QuestionsAdapter
     private int testId;
     private String code;
 
-    private TextView message1;
-    private TextView message2;
-    private TextView message3;
-    private LinearLayout linear;
+    private TextView title;
+    private TextView message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +30,8 @@ public class QuestionsList extends AppCompatActivity implements QuestionsAdapter
         questions = new ArrayList<>();
         trueOrFalse = new ArrayList<>();
 
-        message1 = findViewById(R.id.message1);
-        message2 = findViewById(R.id.message2);
-        message3 = findViewById(R.id.message3);
-        linear = findViewById(R.id.linear2);
+        title = findViewById(R.id.title);
+        message = findViewById(R.id.message);
 
         code = getIntent().getStringExtra("code");
         if (code.equals("test_questions") || code.equals("previous_attempts"))
@@ -50,17 +45,16 @@ public class QuestionsList extends AppCompatActivity implements QuestionsAdapter
         if (code.equals("test_questions") || code.equals("previous_attempts")) {
             int testScore = dbHandler.getTestScore(testId);
             if (testScore < 19) {
-                linear.setBackgroundResource(R.drawable.false_item);
-                message2.setText(getString(R.string.failure_message));
+                message.setBackgroundResource(R.drawable.wrong_item);
+                message.setTextColor(getResources().getColor(R.color.colorAccent));
             }
             else {
-                linear.setBackgroundResource(R.drawable.correct_item);;
-                message2.setText(getString(R.string.success_message));
+                message.setBackgroundResource(R.drawable.correct_item);;
             }
             if (code.equals("test_questions"))
-                message1.setText(getString(R.string.results));
-            else message1.setText(getString(R.string.menu_previous_attempts));
-            message3.setText(getString(R.string.your_score_was) + testScore + "/20");
+                title.setText(getString(R.string.results));
+            else title.setText(getString(R.string.menu_previous_attempts));
+            message.setText(getString(R.string.your_score_was) + testScore + "/20");
             TestQuestionDB[] questionsDB;
             questionsDB = dbHandler.getPreviousTestQuestions(testId);
             for (int i = 0; i < 20; i++) {
@@ -70,9 +64,9 @@ public class QuestionsList extends AppCompatActivity implements QuestionsAdapter
         }
         else if (code.equals("saved_questions")) {
             int savedSize = dbHandler.getSavedSize();
-            message1.setText(getString(R.string.menu_saved_questions));
-            message2.setText(getString(R.string.number_of_saved_questions));
-            message3.setText("" + savedSize);
+            title.setText(getString(R.string.menu_saved_questions));
+            message.setText(getString(R.string.number_of_saved_questions) + ": " + savedSize);
+            message.setTextColor(getResources().getColor(R.color.orangish));
             if (savedSize > 0) {
                 QuestionDB[] saved = new QuestionDB[savedSize];
                 saved = dbHandler.getSaved();

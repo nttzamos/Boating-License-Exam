@@ -13,9 +13,7 @@ import java.util.ArrayList;
 public class TestsList extends AppCompatActivity implements TestsAdapter.OnQuestionListener {
     private ArrayList<Integer> tests;
 
-    private TextView message1;
-    private TextView message2;
-    private TextView message3;
+    private TextView message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +26,7 @@ public class TestsList extends AppCompatActivity implements TestsAdapter.OnQuest
         System.out.println("Resumed");
         tests = new ArrayList<>();
 
-        message1 = findViewById(R.id.message1);
-        message2 = findViewById(R.id.message2);
-        message3 = findViewById(R.id.message3);
+        message = findViewById(R.id.message);
 
         initQuestions();
         super.onResume();
@@ -39,9 +35,7 @@ public class TestsList extends AppCompatActivity implements TestsAdapter.OnQuest
     private void initQuestions(){
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
         int testsSize = dbHandler.getTestSize();
-        message1.setText(getString(R.string.menu_previous_attempts));
-        message2.setText(getString(R.string.number_of_tests));
-        message3.setText("" + testsSize);
+        message.setText(getString(R.string.number_of_tests) + ": " + testsSize);
         int[][] tests = new int[testsSize][2];
         tests = dbHandler.getTests();;
         for (int i=0; i<testsSize; i++)

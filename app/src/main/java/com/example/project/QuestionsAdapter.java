@@ -49,6 +49,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
 
 
         holder.title.setText("Ερώτηση " + (position+1));
+//        holder.title.setText("Αποθηκευμένη Ερώτηση " + (position+1));
     }
 
     @Override

@@ -35,8 +35,8 @@
     <string name="successes">Επιτυχημένα:</string>
     <string name="failures">Αποτυχημένα:</string>
 
-    <string name="number_of_tests">Αριθμός Τεστ</string>
-    <string name="number_of_saved_questions">Αριθμός Αποθηκευμένων Ερωτήσεων</string>
+    <string name="number_of_tests">Πλήθος Τεστ</string>
+    <string name="number_of_saved_questions">Πλήθος Ερωτήσεων</string>
 
     <string name="sentence_dummy">This is a long sentence.</string>
 
