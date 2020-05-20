@@ -33,10 +33,14 @@ public class TestsAdapter extends RecyclerView.Adapter<TestsAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.title.setText("Τεστ " + (position+1));
         int testScore = tests.get(position);
-        //System.out.println(testScore);
-        if (testScore >= 19)
-            holder.verdict.setText("Επέτυχες");
-        else holder.verdict.setText("Απέτυχες");
+        if (testScore >= 19) {
+            holder.verdict.setText(context.getString(R.string.success_message));
+            holder.verdict.setTextColor(context.getResources().getColor(R.color.greenish));
+        }
+        else {
+            holder.verdict.setText(context.getString(R.string.failure_message));
+            holder.verdict.setTextColor(context.getResources().getColor(R.color.reddish));
+        }
         holder.score.setText(testScore + "/20");
     }
 
