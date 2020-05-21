@@ -5,8 +5,7 @@
     android:id="@+id/constraint"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/list_item"
-    android:foreground="?attr/selectableItemBackground"
+    android:background="@drawable/list_item_ripple"
     android:layout_marginVertical="4dp"
     android:layout_marginHorizontal="4dp"
     android:padding="16dp">

@@ -44,6 +44,7 @@
 
     <string name="question_saved_successfully">Η ερώτηση αποθηκεύτηκε επιτυχώς.</string>
     <string name="question_already_saved">Η ερώτηση έχει αποθηκευτεί ήδη.</string>
+    <string name="question_deleted">Η ερώτηση αφαιρέθηκε από τις Αποθηκευμένες Ερωτήσεις.</string>
 
     <string name="results">Αποτελέσματα</string>
 

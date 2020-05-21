@@ -70,6 +70,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:clickable="true"
             android:focusable="true"
+            android:background="?selectableItemBackgroundBorderless"
             android:onClick="save"
             app:srcCompat="@drawable/custom_save"/>
 
@@ -129,7 +130,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/choice"
+            android:background="@drawable/choice_ripple"
             android:text="@string/previous"
             android:onClick="previous"
             app:layout_constraintHorizontal_bias="0.5"
@@ -146,7 +147,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/choice"
+            android:background="@drawable/choice_ripple"
             android:backgroundTint="@color/colorPrimary"
             android:text="@string/next"
             android:onClick="next"

@@ -97,6 +97,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:clickable="true"
             android:focusable="true"
+            android:background="?selectableItemBackgroundBorderless"
             app:srcCompat="@drawable/custom_save"/>
 
         <LinearLayout
@@ -118,8 +119,7 @@
                 android:onClick="choice1"
                 android:text="@string/button"
                 android:textAllCaps="false"
-                android:background="@drawable/choice"
-                android:foreground="?attr/selectableItemBackground"
+                android:background="@drawable/choice_ripple"
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="6dp"/>
 
@@ -131,8 +131,7 @@
                 android:onClick="choice2"
                 android:text="@string/button"
                 android:textAllCaps="false"
-                android:background="@drawable/choice"
-                android:foreground="?attr/selectableItemBackground"
+                android:background="@drawable/choice_ripple"
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="6dp"/>
 
@@ -144,8 +143,7 @@
                 android:onClick="choice3"
                 android:text="@string/button"
                 android:textAllCaps="false"
-                android:background="@drawable/choice"
-                android:foreground="?attr/selectableItemBackground"
+                android:background="@drawable/choice_ripple"
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="6dp"/>
         </LinearLayout>
@@ -157,8 +155,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/choice"
-            android:foreground="?attr/selectableItemBackground"
+            android:background="@drawable/choice_ripple"
             android:onClick="previous"
             android:text="@string/previous"
             app:layout_constraintHorizontal_bias="0.5"
@@ -175,8 +172,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/choice"
-            android:foreground="?attr/selectableItemBackground"
+            android:background="@drawable/choice_ripple"
             android:backgroundTint="@color/colorPrimary"
             android:onClick="next"
             android:text="@string/next"
@@ -185,7 +181,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/previous"
             app:layout_constraintTop_toBottomOf="@id/linear2" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

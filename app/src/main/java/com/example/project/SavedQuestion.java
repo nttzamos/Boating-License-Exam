@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -53,7 +54,7 @@ public class SavedQuestion extends AppCompatActivity {
         setTexts();
     }
 
-    public void delete(View view) {
+    public void changeState(View view) {
         if (!deleted) {
             delete.setImageResource(R.drawable.custom_save);
             deleted = true;
@@ -72,6 +73,9 @@ public class SavedQuestion extends AppCompatActivity {
         dbHandler.deleteSaved(move.get(it));
 
         move.remove(it);
+
+        Toast toast = Toast.makeText(this, getString(R.string.question_deleted), Toast.LENGTH_SHORT);
+        toast.show();
     }
 
     public void next(View view) {
@@ -125,6 +129,8 @@ public class SavedQuestion extends AppCompatActivity {
         if (deleted) {
             MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
             dbHandler.deleteSaved(move.get(it));
+            Toast toast = Toast.makeText(this, getString(R.string.question_deleted), Toast.LENGTH_SHORT);
+            toast.show();
         }
         super.onBackPressed();
     }

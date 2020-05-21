@@ -7,4 +7,5 @@
     <color name="greenish">#00C853</color>
     <color name="reddish">#E90000</color>
     <color name="orangish">#F0C674</color>
+    <color name="ripple">?attr/colorControlHighlight</color>
 </resources>
