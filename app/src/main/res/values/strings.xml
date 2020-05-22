@@ -8,7 +8,7 @@
     <string name="cancel">Ακυρο</string>
 
     <string name="menu_test_simulation">Προσομοίωση Εξέτασης</string>
-    <string name="menu_theory">Κατέβασε την ύλη</string>
+    <string name="menu_theory">Κατεβάστε την ύλη</string>
     <string name="menu_previous_attempts">Προηγούμενες Προσπάθειες</string>
     <string name="menu_test_scores">Βαθμολογία</string>
     <string name="menu_saved_questions">Αποθηκευμένες Ερωτήσεις</string>

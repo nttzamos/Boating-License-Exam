@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".TestsList" android:configChanges="orientation|screenSize" />
         <activity android:name=".QuestionsList" android:configChanges="orientation|screenSize" />
-        <activity android:name=".TestQuestion" />
+        <activity android:name=".TestQuestion" android:configChanges="orientation|screenSize" />
         <activity android:name=".SavedQuestion" android:configChanges="orientation|screenSize" />
         <activity android:name=".TestScores" />
         <activity android:name=".Test" android:configChanges="orientation|screenSize" />
