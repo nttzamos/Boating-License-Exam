@@ -24,7 +24,7 @@ public class Test extends AppCompatActivity {
     private int score;
     private ArrayList<Integer> move;
 
-    private long testDuration = 0*60000 + 25*1000;
+    private long testDuration = 40*60000 + 0*1000;
     private long timeRemaining;
 
     CountDownTimer countDownTimer;

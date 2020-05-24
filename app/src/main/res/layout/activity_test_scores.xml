@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
-            android:id="@+id/success"
+            android:id="@+id/successes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -27,7 +27,7 @@
             android:text="@string/successes"/>
 
         <TextView
-            android:id="@+id/failure"
+            android:id="@+id/failures"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

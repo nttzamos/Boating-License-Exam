@@ -23,7 +23,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
+        <TextView
             android:id="@+id/button1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -31,25 +31,19 @@
             android:layout_marginTop="32dp"
             android:layout_marginHorizontal="32dp"
             android:background="@drawable/question_ripple"
+            android:text="@string/menu_test_simulation"
+            android:textColor="@color/blackish"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            android:gravity="center"
             android:clickable="true"
             android:focusable="true"
             android:onClick="goToTest"
-            android:gravity="center"
-            android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/menu_test_simulation"
-                android:textColor="@color/blackish"
-                android:textSize="22sp"
-                android:textStyle="bold"/>
-        </LinearLayout>
-
-        <LinearLayout
+        <TextView
             android:id="@+id/button2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -57,27 +51,19 @@
             android:layout_marginTop="24dp"
             android:layout_marginHorizontal="32dp"
             android:background="@drawable/question_ripple"
+            android:text="@string/menu_theory"
+            android:textColor="@color/blackish"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            android:gravity="center"
             android:clickable="true"
             android:focusable="true"
             android:onClick="goToTheory"
-            android:gravity="center"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button1">
+            app:layout_constraintTop_toBottomOf="@+id/button1" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/menu_theory"
-                android:textColor="@color/blackish"
-                android:textSize="22sp"
-                android:textStyle="bold"/>
-
-        </LinearLayout>
-        
-        <LinearLayout
+        <TextView
             android:id="@+id/button3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -85,25 +71,19 @@
             android:layout_marginTop="24dp"
             android:layout_marginHorizontal="32dp"
             android:background="@drawable/question_ripple"
+            android:text="@string/menu_previous_attempts"
+            android:textColor="@color/blackish"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            android:gravity="center"
             android:clickable="true"
             android:focusable="true"
             android:onClick="goToTestsList"
-            android:gravity="center"
-            android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button2">
+            app:layout_constraintTop_toBottomOf="@+id/button2" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/menu_previous_attempts"
-                android:textColor="@color/blackish"
-                android:textSize="22sp"
-                android:textStyle="bold"/>
-        </LinearLayout>
-        
-        <LinearLayout
+        <TextView
             android:id="@+id/button4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -111,51 +91,38 @@
             android:layout_marginTop="24dp"
             android:layout_marginHorizontal="32dp"
             android:background="@drawable/question_ripple"
+            android:text="@string/menu_test_scores"
+            android:textColor="@color/blackish"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            android:gravity="center"
             android:clickable="true"
             android:focusable="true"
-            android:onClick="goToScoresReal"
-            android:gravity="center"
-            android:orientation="horizontal"
+            android:onClick="goToTestScores"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button3">
+            app:layout_constraintTop_toBottomOf="@+id/button3" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/menu_test_scores"
-                android:textColor="@color/blackish"
-                android:textSize="22sp"
-                android:textStyle="bold"/>
-        </LinearLayout>
-        
-        <LinearLayout
+        <TextView
             android:id="@+id/button5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="12dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginVertical="24dp"
             android:layout_marginHorizontal="32dp"
             android:background="@drawable/question_ripple"
+            android:text="@string/menu_saved_questions"
+            android:textColor="@color/blackish"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            android:gravity="center"
             android:clickable="true"
             android:focusable="true"
-            android:onClick="goToSaved"
-            android:gravity="center"
-            android:orientation="horizontal"
+            android:onClick="goToSavedQuestions"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/button4"
-            app:layout_constraintBottom_toBottomOf="parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/menu_saved_questions"
-                android:textColor="@color/blackish"
-                android:textSize="22sp"
-                android:textStyle="bold"/>
-        </LinearLayout>
+            app:layout_constraintBottom_toBottomOf="parent"/>
         
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

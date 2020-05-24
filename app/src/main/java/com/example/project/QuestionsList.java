@@ -44,7 +44,7 @@ public class QuestionsList extends AppCompatActivity implements QuestionsAdapter
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
         if (code.equals("test_questions") || code.equals("previous_attempts")) {
             int testScore = dbHandler.getTestScore(testId);
-            if (testScore < 19) {
+            if (testScore < 18) {
                 message.setBackgroundResource(R.drawable.wrong_item);
                 message.setTextColor(getResources().getColor(R.color.colorAccent));
             }

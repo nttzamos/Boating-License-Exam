@@ -13,8 +13,8 @@ public class TestScores extends AppCompatActivity {
 
     private LineGraphSeries<DataPoint> series;
 
-    TextView succ;
-    TextView fail;
+    TextView successes;
+    TextView failures;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +27,8 @@ public class TestScores extends AppCompatActivity {
 		if (testSize == 0)
 			return;
 
-		int success = 0;
-		int failure = 0;
+		int successesSum = 0;
+		int failuresSum = 0;
 
         int x=0,y;
         GraphView graph=findViewById(R.id.graph);
@@ -40,16 +40,16 @@ public class TestScores extends AppCompatActivity {
             y = tests[i][1];
             series.appendData(new DataPoint(x,y),true,testSize);
 
-            if (y >= 19)
-                success++;
-            else failure++;
+            if (y >= 18)
+                successesSum++;
+            else failuresSum++;
         }
 
-        succ = findViewById(R.id.success);
-        fail = findViewById(R.id.failure);
+        successes = findViewById(R.id.successes);
+        failures = findViewById(R.id.failures);
 
-        succ.setText(getString(R.string.successes) + " " + success);
-        fail.setText(getString(R.string.failures) + " " + failure);
+        successes.setText(getString(R.string.successes) + " " + successesSum);
+        failures.setText(getString(R.string.failures) + " " + failuresSum);
 
         graph.addSeries(series);
         graph.getViewport().setXAxisBoundsManual(true);

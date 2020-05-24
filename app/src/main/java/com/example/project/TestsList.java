@@ -28,14 +28,16 @@ public class TestsList extends AppCompatActivity implements TestsAdapter.OnQuest
 
         message = findViewById(R.id.message);
 
-        initQuestions();
+        initTests();
         super.onResume();
     }
 
-    private void initQuestions(){
+    private void initTests(){
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
         int testsSize = dbHandler.getTestSize();
         message.setText(getString(R.string.number_of_tests) + ": " + testsSize);
+        if (testsSize == 0)
+            return;
         int[][] tests = new int[testsSize][2];
         tests = dbHandler.getTests();;
         for (int i=0; i<testsSize; i++)

@@ -64,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
         });
         alert = builder.create();
         alert.show();
-//        startDownloading();
     }
 
     public void goToTestsList(View view){
@@ -72,12 +71,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    public void goToScoresReal(View view){
+    public void goToTestScores(View view){
         Intent i = new Intent(this, TestScores.class);
         startActivity(i);
     }
 
-    public void goToSaved(View view){
+    public void goToSavedQuestions(View view){
         Intent i = new Intent(this, QuestionsList.class);
         i.putExtra("code", "saved_questions");
         startActivity(i);
