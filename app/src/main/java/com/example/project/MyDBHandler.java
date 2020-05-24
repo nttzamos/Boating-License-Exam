@@ -9,6 +9,7 @@ import android.content.ContentValues;
 
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Arrays;
@@ -93,6 +94,45 @@ public class MyDBHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    public void initDatabase(Context context){
+        initCurrentSavedId();
+        if (getQuestionSize() > 0)
+            return;
+
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new InputStreamReader(context.getAssets().open("data.txt")));
+            String text;
+            int chapter = 0;
+            int id = 0;
+            while (true){
+                //System.out.println(id);
+                text = reader.readLine();
+                if (text.equals("END"))
+                    break;
+                else if (text.equals("NEW")) {
+                    //System.out.println(id + " " + chapter);
+                    chapter++;
+                    reader.readLine();
+                    text = reader.readLine();
+                }
+                id++;
+                int question_no = Integer.parseInt(text);
+                //reader.readLine();
+                String question = reader.readLine();
+                String choice_1 = reader.readLine();
+                String choice_2 = reader.readLine();
+                String choice_3 = reader.readLine();
+                int correctAnswer = Integer.parseInt(reader.readLine());
+                reader.readLine();
+                QuestionDB questionDB = new QuestionDB(id, chapter, question_no, question, choice_1, choice_2, choice_3, correctAnswer);
+                addQuestion(questionDB);
+            }
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
 
     public void addQuestion(QuestionDB questionDB){
         ContentValues values = new ContentValues();
@@ -128,78 +168,13 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-    private void addSQLEntries(SQLiteDatabase db){
-        System.out.println("Hellllll");
-        BufferedReader reader = null;
-        try {
-            //AssetManager man = new AssetManager();
-
-            reader.readLine();
-            reader.readLine();
-            String newLine = reader.readLine();
-            ContentValues values = new ContentValues();
-            values.put(COLUMN_ID,1);
-            values.put(COLUMN_CHAPTER,1);
-            values.put(COLUMN_QUESTION_NO,1);
-            values.put(COLUMN_QUESTION, newLine);
-            values.put(COLUMN_CHOICE_1,newLine);
-            values.put(COLUMN_CHOICE_2,newLine);
-            values.put(COLUMN_CHOICE_3,newLine);
-            values.put(COLUMN_CORRECT_ANSWER,1);
-            SQLiteDatabase db1 = this.getWritableDatabase();
-            db1.insert(TABLE_QUESTIONS, null, values);
-            db1.close();
-
-            /*
-            while ((newLine = reader.readLine()) != null){
-                ContentValues values = new ContentValues();
-                values.put(COLUMN_ID,1);
-                values.put(COLUMN_CHAPTER,1);
-                values.put(COLUMN_QUESTION_NO,1);
-                values.put(COLUMN_QUESTION, newLine);
-                values.put(COLUMN_CHOICE_1,newLine);
-                values.put(COLUMN_CHOICE_2,newLine);
-                values.put(COLUMN_CHOICE_3,newLine);
-                values.put(COLUMN_CORRECT_ANSWER,1);
-                SQLiteDatabase db1 = this.getWritableDatabase();
-                db1.insert(TABLE_QUESTIONS, null, values);
-                db1.close();
-            }*/
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    public QuestionDB findQuestion(int chapter, int question_no){
-        System.out.println("Working22");
-        String query = "SELECT * FROM " + TABLE_QUESTIONS + " WHERE " + COLUMN_CHAPTER + " =" + chapter + " AND " + COLUMN_QUESTION_NO + " ="  + question_no;
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(query, null);
-        int tmp1, tmp2, tmp3, tmp8;
-        String tmp4="", tmp5="", tmp6="", tmp7="";
-        if (cursor.moveToFirst()) {
-            tmp1 = Integer.parseInt(cursor.getString(0));
-            tmp2 = Integer.parseInt(cursor.getString(1));
-            tmp3 = Integer.parseInt(cursor.getString(2));
-            tmp8 = Integer.parseInt(cursor.getString(7));
-            tmp4 = cursor.getString(3);
-            tmp5 = cursor.getString(4);
-            tmp6 = cursor.getString(5);
-            tmp7 = cursor.getString(6);
-            QuestionDB questionDB = new QuestionDB(tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8 );
-            return questionDB;
-        }
-        return null;
-    }
-
     public int getQuestionSize(){
         String query = "SELECT * FROM " + TABLE_QUESTIONS;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-
-        System.out.println("The number of questions in the database is " + cursor.getCount());
+        int size = cursor.getCount();
         db.close();
-        return cursor.getCount();
+        return size;
     }
 
     public void addTest(int score){
@@ -216,9 +191,9 @@ public class MyDBHandler extends SQLiteOpenHelper {
         String query = "SELECT * FROM " + TABLE_TESTS;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        System.out.println("The number of tests taken already is :" + cursor.getCount());
+        int size = cursor.getCount();
         db.close();
-        return cursor.getCount();
+        return size;
     }
 
     public int[][] getTests(){
@@ -255,12 +230,10 @@ public class MyDBHandler extends SQLiteOpenHelper {
             arr[i] = i + 1;
         Collections.shuffle(Arrays.asList(arr));
 
-
         int tmp1, tmp2, tmp3, tmp8;
         String tmp4="", tmp5="", tmp6="", tmp7="";
         SQLiteDatabase db = this.getReadableDatabase();
         for (int i=0; i<20; i++){
-            System.out.println("Current question has id = " + arr[i]);
             String query = "SELECT * FROM " + TABLE_QUESTIONS + " WHERE " +
                     COLUMN_ID + " = " + arr[i];
             Cursor cursor = db.rawQuery(query, null);
@@ -287,14 +260,11 @@ public class MyDBHandler extends SQLiteOpenHelper {
         if (cursor.moveToFirst())
             return false;
 
-
-        System.out.println("Current is : " + currentSavedId);
         ContentValues values = new ContentValues();
         values.put(COLUMN_ID, currentSavedId++);
         values.put(COLUMN_QUESTION_ID, savedDB.getQuestionId());
         db.insert(TABLE_SAVED_QUESTIONS, null, values);
         db.close();
-        System.out.println("Question saved");
         return true;
     }
 
@@ -305,20 +275,11 @@ public class MyDBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         QuestionDB[] questions = new QuestionDB[cursor.getCount()];
-        int i=1;
-        cursor.moveToFirst();
         int tmp1, tmp2, tmp3, tmp8;
         String tmp4="", tmp5="", tmp6="", tmp7="";
-        tmp1 = Integer.parseInt(cursor.getString(0));
-        tmp2 = Integer.parseInt(cursor.getString(1));
-        tmp3 = Integer.parseInt(cursor.getString(2));
-        tmp8 = Integer.parseInt(cursor.getString(7));
-        tmp4 = cursor.getString(3);
-        tmp5 = cursor.getString(4);
-        tmp6 = cursor.getString(5);
-        tmp7 = cursor.getString(6);
-        questions[0] = new QuestionDB(tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8 );
-        while (cursor.moveToNext()){
+        int i=0;
+        cursor.moveToFirst();
+        do {
             tmp1 = Integer.parseInt(cursor.getString(0));
             tmp2 = Integer.parseInt(cursor.getString(1));
             tmp3 = Integer.parseInt(cursor.getString(2));
@@ -328,7 +289,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
             tmp6 = cursor.getString(5);
             tmp7 = cursor.getString(6);
             questions[i++] = new QuestionDB(tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8 );
-        }
+        } while (cursor.moveToNext());
         db.close();
         return questions;
     }
@@ -350,7 +311,6 @@ public class MyDBHandler extends SQLiteOpenHelper {
         if (cursor.moveToFirst() && cursor.getString(0) != null )
             currentSavedId = Integer.parseInt(cursor.getString(0)) + 1;
         else currentSavedId = 1;
-        System.out.println("Maximum plus 1 is : " + currentSavedId );
         db.close();
     }
 
@@ -385,9 +345,9 @@ public class MyDBHandler extends SQLiteOpenHelper {
         String query = "SELECT * FROM " + TABLE_SAVED_QUESTIONS;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        System.out.println("The number of questions saved is : " + cursor.getCount());
+        int size = cursor.getCount();
         db.close();
-        return cursor.getCount();
+        return size;
     }
 
     public void addTestQuestions(TriesDB[] testQuestions){
@@ -405,18 +365,6 @@ public class MyDBHandler extends SQLiteOpenHelper {
             db.insert(TABLE_TEST_QUESTIONS, null, values);
         }
         db.close();
-    }
-
-    public int getPrevious(int testId){
-        String query = "SELECT * FROM " + TABLE_TESTS + " INNER JOIN " + TABLE_TEST_QUESTIONS + " ON " +
-                TABLE_TESTS + "." + COLUMN_ID + " = " + TABLE_TEST_QUESTIONS + "." + COLUMN_TEST_ID +
-                " INNER JOIN " + TABLE_QUESTIONS + " ON " + TABLE_TEST_QUESTIONS + "." + COLUMN_QUESTION_ID +
-                " = " + TABLE_QUESTIONS + "." + COLUMN_ID + " WHERE " + TABLE_TEST_QUESTIONS + "." +
-                COLUMN_TEST_ID + " = " + testId;
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(query, null);
-        db.close();
-        return cursor.getCount();
     }
 
     public TestQuestionDB[] getPreviousTestQuestions(int testId){
