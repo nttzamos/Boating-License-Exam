@@ -9,15 +9,9 @@ import android.os.Bundle;
 
 import android.view.View;
 
-import java.io.BufferedReader;
-
-import java.io.IOException;
-import java.io.InputStreamReader;
-
 import android.app.DownloadManager;
 import android.content.Context;
 import android.net.Uri;
-
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -45,6 +39,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    /**
+     * Όταν ο χρήστης πατήσει στην επιλογή "Κατέβασε την ύλη" στο αρχικό μενού τότε το εμφανίζεται
+     * ένα AlertDialog που τον ρωτάει αν είναι σίγουρος ότι θέλει να κατεβάσει την ύλη.
+     * Αν ο χρήστης επιλέξει ναι τότε καλεί την συνάρτηση startDownloading().
+     */
     public void goToTheory(View view){
         builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
         builder.setTitle(getString(R.string.download_title));
@@ -83,6 +82,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    /**
+     * Παίρνει το URI για το αρχείο "theory.pdf" από την Firebase που έχουμε φτιάξει και
+     * ορίζει πως όταν γίνει η λήψη του αρχείου αυτό θα αποθηκευτεί με το όνομα
+     * "Ύλη Εξέτασης - Δίπλωμα Ταχυπλόου Σκάφους.pdf". Τέλος καλεί την συνάρτηση downloadFile()
+     * για να πραγματοποιήσει την λήψη του αρχείου.
+     */
     private void startDownloading(){
         StorageReference storageReference;
         storageReference = FirebaseStorage.getInstance().getReference();

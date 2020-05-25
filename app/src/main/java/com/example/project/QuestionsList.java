@@ -24,15 +24,36 @@ public class QuestionsList extends AppCompatActivity implements QuestionsAdapter
         setContentView(R.layout.activity_questions_list);
     }
 
+    /**
+     * Κάνουμε override την συνάρτηση onResume(). Αυτο γίνεται για να λειτουργεί σωστά η εφαρμογή
+     * όταν ο χρήστης αφαιρεί μια ερώτηση από τις "Αποθηκευμένες Ερώτησεις" και πατάει το back button
+     * για να επιστρέψει στο activity αυτό όπου και θα δει την λίστα με τις αποθηκευμένες του ερωτήσεις.
+     * Αν δεν κάναμε το override αυτό στην περίπτωση που ο χρήστης είχε αρχικά 10 αποθηκευμένες ερωτήσεις,
+     * πατούσε έπειτα μια από αυτές για να την δει, την διέγραφε και έπειτα πατούσε το back button για
+     * να επιστρέψει στην λίστα που δείχνει τις αποθηκευμένες του ερωτήσεις θα έβλεπε πάλι τις ίδιες 10
+     * καθώς παρά την ανανέωση που θα γινόταν στην βάση δεδομένων, το περιεχόμενο του recyclerView δεν
+     * θα ανανεωνόταν.
+     *
+     * Φυσικά χρησιμοποιείται και στις υπόλοιποες περιπτώσεις που χρησιμοποιείται το activity μέσα στην
+     * εφαρμογή. Τέλος ο κώδικας που βρίσκεται εδώ δεν βρίσκεται και στην onCreate() του activity, κάτι
+     * που δεν δημιουργεί κάποιο πρόβλημα καθώς έτσι και αλλιώς κατά την δημιουργία του activity μετά την
+     * onCreate() καλείται αυτόματα και η onResume().
+     */
     @Override
     public void onResume() {
-        System.out.println("Resumed");
         questions = new ArrayList<>();
         trueOrFalse = new ArrayList<>();
 
         title = findViewById(R.id.title);
         message = findViewById(R.id.message);
 
+        /*
+            Η code είναι μια μεταβλητή που χρησιμοποιείται για να γνωρίζουμε αν την στιγμή που
+            καλείται το activity δείχνουμε στον χρήστη την λίστα με τα αποτελέσματα των απαντήσεων του
+            αμέσως μόλις αυτός έχει ολοκληρώσει το τεστ, αν έχει πάει στις "Προηγούμενες Προσπάθειες"
+            προκειμένου να δει τις ερωτήσεις από ένα από τα προηγούμενα τεστ του ή αν βλέπει την λίστα
+            με τις αποθηκευμένες ερωτήσεις του.
+         */
         code = getIntent().getStringExtra("code");
         if (code.equals("test_questions") || code.equals("previous_attempts"))
             testId = getIntent().getIntExtra("testId", 0);
@@ -40,6 +61,10 @@ public class QuestionsList extends AppCompatActivity implements QuestionsAdapter
         super.onResume();
     }
 
+    /**
+     * Συνάρτηση που ανάλογα τον κωδικό που έχει περαστεί στο activity
+     * δημιουργεί την αντίστοιχη λίστα από ερωτήσεις.
+     */
     private void initQuestions(){
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
         if (code.equals("test_questions") || code.equals("previous_attempts")) {
@@ -86,6 +111,9 @@ public class QuestionsList extends AppCompatActivity implements QuestionsAdapter
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
+    /**
+     * Συνάρτηση που όταν ο χρήστης κάνει κλικ σε μια ερώτηση, τον οδηγεί στο αντίστοιχο activity.
+     */
     @Override
     public void onQuestionClick(int questionId) {
         if (code.equals("test_questions") || code.equals("previous_attempts")) {

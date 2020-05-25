@@ -9,6 +9,9 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
+/**
+ * Κλάση που δημιουργεί ένα γράφημα με όλα τα σκορ των τεστ του χρήστη.
+ */
 public class TestScores extends AppCompatActivity {
 
     private LineGraphSeries<DataPoint> series;
@@ -32,6 +35,8 @@ public class TestScores extends AppCompatActivity {
 
         int x=0,y;
         GraphView graph=findViewById(R.id.graph);
+
+        //Στην series θα αποθηκεύσουμε όλα τα σημεία τύπου DataPoint που θα απεικονιστούν στο γράφημα.
         series = new LineGraphSeries<>();
 		int[][] tests = new int[testSize][2];
         tests = dbHandler.getTests();;
@@ -51,6 +56,7 @@ public class TestScores extends AppCompatActivity {
         successes.setText(getString(R.string.successes) + " " + successesSum);
         failures.setText(getString(R.string.failures) + " " + failuresSum);
 
+        //Δημιουργείται το γράφημα.
         graph.addSeries(series);
         graph.getViewport().setXAxisBoundsManual(true);
         graph.getViewport().setMaxX(testSize);

@@ -34,6 +34,9 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
         return new ViewHolder(view, onQuestionListener);
     }
 
+    /**
+     * Συνάρτηση που περνάει τα δεδομένα σε κάθε item του RecyclerView.
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         if (!code.equals("saved_questions")) {
@@ -42,6 +45,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
             else holder.trueOrFalse.setImageResource(R.drawable.custom_wrong);
         }
 
+        //Αν το κείμενο της ερώτησης είναι μεγάλο, εμφανίζει ένα αρχικο απόσπασμα και μετα αποσιωπητικά.
         if(question.get(position).length()<95)
             holder.question.setText(question.get(position));
         else
@@ -49,7 +53,6 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
 
 
         holder.title.setText("Ερώτηση " + (position+1));
-//        holder.title.setText("Αποθηκευμένη Ερώτηση " + (position+1));
     }
 
     @Override

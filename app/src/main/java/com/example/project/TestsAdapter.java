@@ -29,6 +29,9 @@ public class TestsAdapter extends RecyclerView.Adapter<TestsAdapter.ViewHolder> 
         return new ViewHolder(view, onQuestionListener);
     }
 
+    /**
+     * Συνάρτηση που περνάει τα δεδομένα σε κάθε item του RecyclerView.
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.title.setText("Τεστ " + (position+1));
