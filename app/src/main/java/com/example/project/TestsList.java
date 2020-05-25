@@ -31,7 +31,7 @@ public class TestsList extends AppCompatActivity implements TestsAdapter.OnQuest
         initTests();
         super.onResume();
     }
-
+//δημιουργεί τον πίνακα των τεστς
     private void initTests(){
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
         int testsSize = dbHandler.getTestSize();
@@ -45,13 +45,14 @@ public class TestsList extends AppCompatActivity implements TestsAdapter.OnQuest
 
         initRecyclerView();
     }
+    //δημιουργεί το RecyclerView
     private void initRecyclerView(){
         RecyclerView recyclerView= findViewById(R.id.recycler_view);
         TestsAdapter adapter = new TestsAdapter(tests, this, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
-
+    //όταν ο χρήστης κάνει κλικ σε ένα τεστ, οδηγείται στο activity με τις ερωτήσεις του συγκεκριμένου τεστ
     @Override
     public void onQuestionClick(int questionId) {
         Intent i = new Intent(this, QuestionsList.class);
