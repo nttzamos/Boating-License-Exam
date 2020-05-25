@@ -19,19 +19,14 @@ public class TestsList extends AppCompatActivity implements TestsAdapter.OnQuest
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tests_list);
-    }
-
-    @Override
-    public void onResume() {
-        System.out.println("Resumed");
         tests = new ArrayList<>();
-
         message = findViewById(R.id.message);
-
         initTests();
-        super.onResume();
     }
-//δημιουργεί τον πίνακα των τεστς
+
+    /**
+     * Συνάρτηση που δημιουργεί τον πίνακα των τεστ.
+     */
     private void initTests(){
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
         int testsSize = dbHandler.getTestSize();
@@ -45,14 +40,21 @@ public class TestsList extends AppCompatActivity implements TestsAdapter.OnQuest
 
         initRecyclerView();
     }
-    //δημιουργεί το RecyclerView
+
+    /**
+     * Συνάρτηση που δημιουργεί το RecyclerView.
+     */
     private void initRecyclerView(){
         RecyclerView recyclerView= findViewById(R.id.recycler_view);
         TestsAdapter adapter = new TestsAdapter(tests, this, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
-    //όταν ο χρήστης κάνει κλικ σε ένα τεστ, οδηγείται στο activity με τις ερωτήσεις του συγκεκριμένου τεστ
+
+    /**
+     * Συνάρτηση που όταν ο χρήστης κάνει κλικ σε ένα τεστ, τον οδηγεί
+     * στο activity με τις ερωτήσεις του συγκεκριμένου τεστ.
+     */
     @Override
     public void onQuestionClick(int questionId) {
         Intent i = new Intent(this, QuestionsList.class);

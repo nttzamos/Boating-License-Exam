@@ -28,7 +28,10 @@ public class TestsAdapter extends RecyclerView.Adapter<TestsAdapter.ViewHolder> 
         view = LayoutInflater.from(parent.getContext()).inflate(R.layout.test_item, parent, false);
         return new ViewHolder(view, onQuestionListener);
     }
-    //αποθηκεύεται στην κατάλληλη θέση του xml του item το κατάλληλο δεδομένο
+
+    /**
+     * Συνάρτηση που περνάει τα δεδομένα σε κάθε item του RecyclerView.
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.title.setText("Τεστ " + (position+1));
