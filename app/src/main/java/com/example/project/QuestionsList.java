@@ -39,7 +39,7 @@ public class QuestionsList extends AppCompatActivity implements QuestionsAdapter
         initQuestions();
         super.onResume();
     }
-
+//αναγνωρίζει ποια δραστηριότητα καλεί την δραστηριότητα και δημιουργεί τον αντίστοιχο πίνακα ερωτήσεων
     private void initQuestions(){
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
         if (code.equals("test_questions") || code.equals("previous_attempts")) {
@@ -79,13 +79,14 @@ public class QuestionsList extends AppCompatActivity implements QuestionsAdapter
 
         initRecyclerView();
     }
+    //δημιουργεί το RecyclerView
     private void initRecyclerView(){
         RecyclerView recyclerView= findViewById(R.id.recycler_view);
         QuestionsAdapter adapter = new QuestionsAdapter(questions, trueOrFalse, code, this, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
-
+     //αν ο χρήστης κανει κλικ σε μια ερώτηση οδηγείται στο αντίστοιχο activity
     @Override
     public void onQuestionClick(int questionId) {
         if (code.equals("test_questions") || code.equals("previous_attempts")) {
