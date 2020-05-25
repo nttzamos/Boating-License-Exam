@@ -121,12 +121,10 @@ public class QuestionsList extends AppCompatActivity implements QuestionsAdapter
             i.putExtra("testQuestionId", questionId + 1);
             i.putExtra("testId", testId);
             i.putExtra("code", code);
-            System.out.println("pos : " + questionId + " , test : " + testId);
             startActivity(i);
         }
         else if (code.equals("saved_questions")) {
             Intent i = new Intent(this, SavedQuestion.class);
-            //i.putExtra("savedQuestionId", savedQuestions.get(questionId) );
             i.putExtra("savedQuestionPosition", questionId);
             startActivity(i);
         }
