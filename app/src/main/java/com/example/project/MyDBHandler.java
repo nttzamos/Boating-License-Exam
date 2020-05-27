@@ -18,7 +18,7 @@ import java.util.Collections;
 public class MyDBHandler extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "database1.db";
+    private static final String DATABASE_NAME = "database.db";
 
     //Table Names
     private static final String TABLE_TESTS = "tests";
@@ -94,6 +94,12 @@ public class MyDBHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    /**
+     * Συνάρτηση που ελέγχει αν η βάση δεδομένων έχει δημιουργηθεί και αν δεν έχει
+     * δημιουργηθεί τότε την δημιουργεί. Καλείται κάθε φορά που ανοίγει η εφαρμογή.
+     * Όπως είναι λογικό η βάση δεδομένων δημιουργείται μόνο την πρώτη φορά που ο χρήστης ανοίγει
+     * την εφαρμογή.
+     */
     public void initDatabase(Context context){
         initCurrentSavedId();
         if (getQuestionSize() > 0)
@@ -106,19 +112,16 @@ public class MyDBHandler extends SQLiteOpenHelper {
             int chapter = 0;
             int id = 0;
             while (true){
-                //System.out.println(id);
                 text = reader.readLine();
                 if (text.equals("END"))
                     break;
                 else if (text.equals("NEW")) {
-                    //System.out.println(id + " " + chapter);
                     chapter++;
                     reader.readLine();
                     text = reader.readLine();
                 }
                 id++;
                 int question_no = Integer.parseInt(text);
-                //reader.readLine();
                 String question = reader.readLine();
                 String choice_1 = reader.readLine();
                 String choice_2 = reader.readLine();
@@ -133,7 +136,9 @@ public class MyDBHandler extends SQLiteOpenHelper {
         }
     }
 
-
+    /**
+     * Συνάρτηση που προσθέτει μια ερώτηση στον αντίστοιχο πίνακα της βάσης δεδομένων.
+     */
     public void addQuestion(QuestionDB questionDB){
         ContentValues values = new ContentValues();
         values.put(COLUMN_ID, questionDB.get_id());
@@ -149,25 +154,11 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void deleteEverything(){
-        SQLiteDatabase db = this.getWritableDatabase();
-//        db.execSQL("delete from " + TABLE_SAVED_QUESTIONS);
-        db.delete(TABLE_SAVED_QUESTIONS, null, null);
-        db.execSQL("delete from " + TABLE_QUESTIONS);
-//        db.delete(TABLE_QUESTIONS, null, null);
-//        db.execSQL("delete from " + TABLE_TESTS);
-//        db.delete(TABLE_TESTS, null, null);
-//        db.execSQL("delete from " + TABLE_TEST_QUESTIONS);
-//        db.delete(TABLE_TEST_QUESTIONS, null, null);
-        /*String query = "SELECT * FROM " + TABLE_QUESTIONS;
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(query, null);
-        while (cursor.moveToFirst()){
-            db.delete(TABLE_QUESTIONS, )
-        }*/
-        db.close();
-    }
-
+    /**
+     * Συνάρτηση που επιστρέφει το πλήθος των ερωτήσεων που βρίσκονται στον πίνακα
+     * που περιέχει τις ερωτήσεις της ύλης. Χρησιμοποιείται για να γίνει έλεγχος του κατά πόσο
+     * η βάση δεδομένων έχει δημιουργηθεί ήδη.
+     */
     public int getQuestionSize(){
         String query = "SELECT * FROM " + TABLE_QUESTIONS;
         SQLiteDatabase db = this.getWritableDatabase();
@@ -177,52 +168,10 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return size;
     }
 
-    public void addTest(int score){
-        ContentValues values = new ContentValues();
-        int testId = getTestSize();
-        values.put(COLUMN_ID, testId+1);
-        values.put(COLUMN_SCORE, score);
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.insert(TABLE_TESTS, null, values);
-        db.close();
-    }
-
-    public int getTestSize(){
-        String query = "SELECT * FROM " + TABLE_TESTS;
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(query, null);
-        int size = cursor.getCount();
-        db.close();
-        return size;
-    }
-
-    public int[][] getTests(){
-        String query = "SELECT * FROM " + TABLE_TESTS;
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(query, null);
-        int[][] tests = new int[cursor.getCount()][2];
-        int i=0;
-        cursor.moveToFirst();
-        tests[i][0] = Integer.parseInt(cursor.getString(0));
-        tests[i++][1] = Integer.parseInt(cursor.getString(1));
-        while (cursor.moveToNext()){
-            tests[i][0] = Integer.parseInt(cursor.getString(0));
-            tests[i++][1] = Integer.parseInt(cursor.getString(1));
-        }
-        db.close();
-        return tests;
-    }
-
-    public int getTestScore(int testId){
-        String query = "SELECT " + TABLE_TESTS + "." + COLUMN_SCORE +  " FROM " + TABLE_TESTS + " WHERE " +
-                TABLE_TESTS + "." + COLUMN_ID + " = " + testId;
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(query, null);
-        cursor.moveToFirst();
-        db.close();
-        return Integer.parseInt(cursor.getString(0));
-    }
-
+    /**
+     * Συνάρτηση που κάνοντας χρήση της βοηθητικής κλάσης QuestionDB επιστρέφει 20 τυχαία
+     * επιλεγμένα ερωτήσεις από το ευρύτερο pool ερωτήσεων.
+     */
     public QuestionDB[] getTestQuestions(){
         QuestionDB[] questions = new QuestionDB[20];
         Integer[] arr = new Integer[150];
@@ -252,8 +201,74 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return questions;
     }
 
+    /**
+     * Συνάρτηση που αποθηκεύει τα στοιχεία ενός τεστ στον αντίστοιχο πίνακα της βάσης δεδομένων.
+     */
+    public void addTest(int score){
+        ContentValues values = new ContentValues();
+        int testId = getTestSize();
+        values.put(COLUMN_ID, testId+1);
+        values.put(COLUMN_SCORE, score);
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.insert(TABLE_TESTS, null, values);
+        db.close();
+    }
+
+    /**
+     * Συνάρτηση που επιστρέφει το πλήθος των αποθηκευμένων τεστ στην βάση δεδομένων.
+     */
+    public int getTestSize(){
+        String query = "SELECT * FROM " + TABLE_TESTS;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        int size = cursor.getCount();
+        db.close();
+        return size;
+    }
+
+    /**
+     * Συνάρτηση που επιστρέφει τα στοιχεία όλων των τεστ που έχει ολοκληρώσει ο χρήστης.
+     */
+    public int[][] getTests(){
+        String query = "SELECT * FROM " + TABLE_TESTS;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        int[][] tests = new int[cursor.getCount()][2];
+        int i=0;
+        cursor.moveToFirst();
+        tests[i][0] = Integer.parseInt(cursor.getString(0));
+        tests[i++][1] = Integer.parseInt(cursor.getString(1));
+        while (cursor.moveToNext()){
+            tests[i][0] = Integer.parseInt(cursor.getString(0));
+            tests[i++][1] = Integer.parseInt(cursor.getString(1));
+        }
+        db.close();
+        return tests;
+    }
+
+    /**
+     * Συνάρτηση που επιστρέφει το σκορ ενός τεστ.
+     */
+    public int getTestScore(int testId){
+        String query = "SELECT " + TABLE_TESTS + "." + COLUMN_SCORE +  " FROM " + TABLE_TESTS + " WHERE " +
+                TABLE_TESTS + "." + COLUMN_ID + " = " + testId;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        cursor.moveToFirst();
+        db.close();
+        return Integer.parseInt(cursor.getString(0));
+    }
+
+
+    /**
+     * Συνάρτηση που δέχεται μια ερώτηση και αν αυτή δεν έχει ήδη προστεθεί στις
+     * αποθηκευμένες ερωτήσεις, την προσθέτει και επιστρέφει true. Αν έχει ήδη προστεθεί τότε
+     * επιστρέφει false.
+     */
     public boolean addSaved(SavedDB savedDB){
-        //check if the question has already been saved
+        /*
+            Ελέγχουμε αν η ερώτηση έχει ήδη αποθηκευτεί στον πίνακα με τις αποθηκευμένες ερωτήσεις.
+         */
         String query = "SELECT * FROM " + TABLE_SAVED_QUESTIONS + " WHERE " + COLUMN_QUESTION_ID + " = " + savedDB.getQuestionId();
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
@@ -268,6 +283,10 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return true;
     }
 
+    /**
+     * Συνάρτηση που με χρήση της βοηθητικής κλάσης QuestionDB επισρέφει έναν πίνακα
+     * με τα στοιχεία όλων των αποθηκευμένων ερωτήσεων της βάσης δεδομένων.
+     */
     public QuestionDB[] getSaved(){
         String query = "SELECT " + TABLE_QUESTIONS + ".* FROM " + TABLE_SAVED_QUESTIONS + " INNER JOIN " +
                 TABLE_QUESTIONS + " ON " + TABLE_SAVED_QUESTIONS + "." + COLUMN_QUESTION_ID + " = "
@@ -317,6 +336,9 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * Συνάρτηση που επιστρέφει μια συγκεκριμένη ερώτηση από τις αποθηκευμένες ερωτήσεις της βάσης δεδομένων.
+     */
     public QuestionDB getSavedById(int savedQuestionId){
         String query = "SELECT " + TABLE_QUESTIONS + ".* FROM " + TABLE_QUESTIONS +
                 " WHERE " + TABLE_QUESTIONS + "." + COLUMN_ID + " = " + savedQuestionId;
@@ -338,12 +360,19 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return question;
     }
 
+    /**
+     * Συνάρτηση που αφαιρεί μια ερώτηση από τις αποθηκευμένες ερωτήσεις της βάσης δεδομένων.
+     */
     public void deleteSaved(int savedQuestionId){
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_SAVED_QUESTIONS, COLUMN_QUESTION_ID + " =?", new String[]{Integer.toString(savedQuestionId)});
         db.close();
     }
 
+    /**
+     * Συνάρτηση που επιστρέφει το πλήθος των ερωτήσεων που περιέχονται στον πίνακα με τις
+     * αποθηκευμένες ερωτήσεις της βάσης δεδομένων.
+     */
     public int getSavedSize(){
         String query = "SELECT * FROM " + TABLE_SAVED_QUESTIONS;
         SQLiteDatabase db = this.getWritableDatabase();
@@ -353,6 +382,10 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return size;
     }
 
+    /**
+     * Συνάρτηση που προσθέτει στην βάση δεδομένων τις απαντήσεις του χρήστη σε κάποιο τεστ που
+     * αυτός ολοκλήρωσε. Για να το πετύχει αυτό κάνει χρήση της βοηθητικής κλάσης TriesDB.
+     */
     public void addTestQuestions(TriesDB[] testQuestions){
         int testId = getTestSize();
         int testQuestionId = testId*20+1;
@@ -370,6 +403,11 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * Συνάρτηση που επιστρέφει τόσο τις ερωτήσεις όσο και τις απαντήσεις του χρήστη σε αυτές από ένα
+     * παλιότερο τεστ που αυτός έχει ήδη ολοκληρώσει. Για να το πετύχει αυτό κάνει χρήση της βοηθητικής
+     * κλάσης TestQuestionDB.
+     */
     public TestQuestionDB[] getPreviousTestQuestions(int testId){
         String query = "SELECT " +
                 TABLE_QUESTIONS + "." + COLUMN_ID + "," +

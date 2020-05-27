@@ -1,5 +1,9 @@
 package com.example.project;
 
+/**
+ * Βοηθητική κλάση που χρησιμοποιείται για την αποθήκευση των ερωτήσεων και των
+ * απαντήσεων του χρήστη σε αυτές, κάθε φορά που αυτός ολοκληρώνει ένα τεστ.
+ */
 public class TriesDB {
     private int _id;
     private int testId;

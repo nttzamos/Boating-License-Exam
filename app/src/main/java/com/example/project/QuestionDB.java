@@ -1,5 +1,9 @@
 package com.example.project;
 
+/**
+ * Βοηθητική κλάση για τον πίνακα της βάσης δεδομένων που περιέχει όλες τις πιθανές ερωτήσεις,
+ * τις ερωτήσεις δηλαδή που αποτελούν την ύλη της εξέτασης.
+ */
 public class QuestionDB {
     private int _id;
     private int chapter;
