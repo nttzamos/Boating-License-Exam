@@ -144,6 +144,9 @@ public class SavedQuestion extends AppCompatActivity {
      * Τέλος αρχικοποιεί εκ νεου το σχέδιο του κουμπιού διαγραφής και την τιμή της μεταβλητής toDelete.
      */
     public void setTexts() {
+        choice1.setBackgroundResource(R.drawable.choice);
+        choice2.setBackgroundResource(R.drawable.choice);
+        choice3.setBackgroundResource(R.drawable.choice);
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
         QuestionDB savedQuestion = dbHandler.getSavedById(move.get(it));
         question.setText(savedQuestion.getQuestion());
