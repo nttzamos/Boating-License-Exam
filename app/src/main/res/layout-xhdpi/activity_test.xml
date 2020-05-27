@@ -45,6 +45,7 @@
                 android:padding="16dp"
                 android:layout_marginHorizontal="16dp"
                 android:text="@string/text_view"
+                android:textSize="15sp"
                 android:textColor="@android:color/black"
                 android:textAlignment="center"/>
 
@@ -115,13 +116,16 @@
                 android:id="@+id/choice1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginHorizontal="8dp"
                 android:onClick="choice1"
                 android:text="@string/button"
+                android:textSize="15sp"
                 android:textAllCaps="false"
                 android:background="@drawable/choice_ripple"
                 android:paddingHorizontal="20dp"
-                android:paddingVertical="6dp"/>
+                android:paddingVertical="8dp"/>
 
             <Button
                 android:id="@+id/choice2"
@@ -130,10 +134,11 @@
                 android:layout_margin="8dp"
                 android:onClick="choice2"
                 android:text="@string/button"
+                android:textSize="15sp"
                 android:textAllCaps="false"
                 android:background="@drawable/choice_ripple"
                 android:paddingHorizontal="20dp"
-                android:paddingVertical="6dp"/>
+                android:paddingVertical="8dp"/>
 
             <Button
                 android:id="@+id/choice3"
@@ -142,10 +147,11 @@
                 android:layout_margin="8dp"
                 android:onClick="choice3"
                 android:text="@string/button"
+                android:textSize="15sp"
                 android:textAllCaps="false"
                 android:background="@drawable/choice_ripple"
                 android:paddingHorizontal="20dp"
-                android:paddingVertical="6dp"/>
+                android:paddingVertical="8dp"/>
         </LinearLayout>
 
         <Button
@@ -158,6 +164,7 @@
             android:background="@drawable/choice_ripple"
             android:onClick="previous"
             android:text="@string/previous"
+            android:textSize="15sp"
             android:backgroundTint="@color/colorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/next"
@@ -175,6 +182,7 @@
             android:backgroundTint="@color/colorPrimary"
             android:onClick="next"
             android:text="@string/next"
+            android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/previous"

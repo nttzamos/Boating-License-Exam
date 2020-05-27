@@ -15,7 +15,7 @@
         <activity android:name=".SavedQuestion" android:configChanges="orientation|screenSize" />
         <activity android:name=".TestScores" />
         <activity android:name=".Test" android:configChanges="orientation|screenSize" />
-        <activity android:name=".MainActivity" android:configChanges="orientation|screenSize">
+        <activity android:name=".MainActivity" android:configChanges="orientation|screenSize" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
