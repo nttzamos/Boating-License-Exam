@@ -1,2 +1,2 @@
 # Project
- Android application for boat license exams
+ Android application for boating license examination
