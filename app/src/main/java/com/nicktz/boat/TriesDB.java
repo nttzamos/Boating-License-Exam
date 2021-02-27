@@ -1,4 +1,4 @@
-package com.example.project;
+package com.nicktz.boat;
 
 /**
  * Βοηθητική κλάση που χρησιμοποιείται για την αποθήκευση των ερωτήσεων και των

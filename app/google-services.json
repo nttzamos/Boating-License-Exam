@@ -42,6 +42,35 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:805130111069:android:0e3d91f59c6cfbe55c65b4",
+        "android_client_info": {
+          "package_name": "com.nicktz.boat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "805130111069-egudm812l1eotarj92udslfhvv8r08ou.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAoKxILqS-nlpFtua500ENeCb-A8TLWh40"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "805130111069-egudm812l1eotarj92udslfhvv8r08ou.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"

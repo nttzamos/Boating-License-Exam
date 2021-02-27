@@ -1,6 +1,5 @@
-package com.example.project;
+package com.nicktz.boat;
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -10,7 +9,6 @@ import android.content.ContentValues;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Collections;
@@ -100,14 +98,14 @@ public class MyDBHandler extends SQLiteOpenHelper {
      * Όπως είναι λογικό η βάση δεδομένων δημιουργείται μόνο την πρώτη φορά που ο χρήστης ανοίγει
      * την εφαρμογή.
      */
-    public void initDatabase(Context context){
+    public void initDatabase(Context context, String file){
         initCurrentSavedId();
         if (getQuestionSize() > 0)
             return;
 
         BufferedReader reader = null;
         try {
-            reader = new BufferedReader(new InputStreamReader(context.getAssets().open("data.txt")));
+            reader = new BufferedReader(new InputStreamReader(context.getAssets().open(file)));
             String text;
             int chapter = 0;
             int id = 0;

@@ -1,48 +1,52 @@
 <resources>
-    <string name="app_name">Δίπλωμα Ταχυπλόου Σκάφους</string>
+    <string name="app_name">Boating License Exam</string>
 
-    <string name="download_title">Λήψη Ύλης</string>
-    <string name="download_message">Είστε σίγουροι ότι θέλετε να κατεβάσετε την ύλη; Απαιτείται σύνδεση στο Internet για να ολοκληρωθεί η λήψη.</string>
+    <string name="download_title">Download Content</string>
+    <string name="download_message">Are you sure you want to download the content? An Internet connection is required to complete the download.</string>
 
-    <string name="yes">Ναι</string>
-    <string name="cancel">Ακυρο</string>
+    <string name="yes">Yes</string>
+    <string name="cancel">Cancel</string>
 
-    <string name="menu_test_simulation">Προσομοίωση Εξέτασης</string>
-    <string name="menu_theory">Κατεβάστε την ύλη</string>
-    <string name="menu_previous_attempts">Προηγούμενες Προσπάθειες</string>
-    <string name="menu_test_scores">Βαθμολογία</string>
-    <string name="menu_saved_questions">Αποθηκευμένες Ερωτήσεις</string>
+    <string name="menu_test_simulation">Exam Simulation</string>
+    <string name="menu_theory">Download Theory</string>
+    <string name="menu_previous_attempts">Previous Attempts</string>
 
-    <string name="success_message">Περάσατε!</string>
-    <string name="failure_message">Κοπήκατε</string>
+    <string name="success_message">You have passed!</string>
+    <string name="failure_message">You did not pass</string>
     <string name="out_of_twenty">1/20</string>
 
     <string name="text_view">TextView</string>
     <string name="button">Button</string>
 
-    <string name="previous">Προηγουμενη</string>
-    <string name="next">Επομενη</string>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
 
     <string name="starting_time">20:00</string>
     <string name="ending_time">00:00</string>
 
 
-    <string name="successes">Επιτυχημένα:</string>
-    <string name="failures">Αποτυχημένα:</string>
+    <string name="successes">Successfully:</string>
+    <string name="failures">Failed:</string>
 
-    <string name="number_of_tests">Πλήθος Τεστ</string>
-    <string name="number_of_saved_questions">Πλήθος Ερωτήσεων</string>
+    <string name="number_of_tests">Test Number</string>
+    <string name="number_of_saved_questions">Number of Questions</string>
 
     <string name="sentence_dummy">This is a long sentence.</string>
 
-    <string name="question">Ερώτηση</string>
-    <string name="test">Τεστ</string>
+    <string name="test">Test</string>
+    <string name="question">Question</string>
 
-    <string name="your_score_was">"Το σκορ σας ήταν "</string>
+    <string name="your_score_was">"Your score was "</string>
 
-    <string name="question_saved_successfully">Η ερώτηση αποθηκεύτηκε επιτυχώς.</string>
-    <string name="question_already_saved">Η ερώτηση έχει αποθηκευτεί ήδη.</string>
-    <string name="question_deleted">Η ερώτηση αφαιρέθηκε από τις Αποθηκευμένες Ερωτήσεις.</string>
+    <string name="question_saved_successfully">The question was saved successfully.</string>
+    <string name="question_already_saved">The question has already been saved.</string>
+    <string name="question_deleted">The question was removed from Saved Questions.</string>
 
-    <string name="results">Αποτελέσματα</string>
+    <string name="results">Results</string>
+    <string name="menu_test_scores">Grades</string>
+    <string name="menu_saved_questions">Saved Questions</string>
+
+    <string name="grade">Grade</string>
+    <string name="warning">Warning</string>
+    <string name="exit_message">Are you sure you want to exit? The simulation will be terminated.</string>
 </resources>

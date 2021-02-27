@@ -1,4 +1,4 @@
-package com.example.project;
+package com.nicktz.boat;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -106,10 +106,10 @@ public class Test extends AppCompatActivity {
      */
     private void setDialog() {
         builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
-        builder.setTitle("Προσοχή");
+        builder.setTitle(getString(R.string.warning));
 
-        builder.setMessage("Είστε σίγουροι οτι θέλετε να εξέλθετε; Το τεστ θα τερματιστεί.");
-        builder.setPositiveButton("Ναι", new DialogInterface.OnClickListener() {
+        builder.setMessage(getString(R.string.exit_message));
+        builder.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
@@ -117,7 +117,7 @@ public class Test extends AppCompatActivity {
                 countDownTimer.cancel();
             }
         });
-        builder.setNegativeButton("Ακυρο",new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();

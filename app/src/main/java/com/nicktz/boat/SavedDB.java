@@ -1,4 +1,4 @@
-package com.example.project;
+package com.nicktz.boat;
 
 /**
  * Βοηθητική κλάση για τον πίνακα της βάσης δεδομένων που περιέχει

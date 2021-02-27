@@ -1,4 +1,4 @@
-package com.example.project;
+package com.nicktz.boat;
 
 import android.content.Context;
 

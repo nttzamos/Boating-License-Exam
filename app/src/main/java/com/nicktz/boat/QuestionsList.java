@@ -1,4 +1,4 @@
-package com.example.project;
+package com.nicktz.boat;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;

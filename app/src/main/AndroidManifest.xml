@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.project">
+    package="com.nicktz.boat">
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/logo"
-        android:label="Δίπλωμα Ταχυπλόου Σκάφους"
+        android:label="@string/app_name"
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TestsList" android:configChanges="orientation|screenSize" />
-        <activity android:name=".QuestionsList" android:configChanges="orientation|screenSize" />
-        <activity android:name=".TestQuestion" android:configChanges="orientation|screenSize" />
-        <activity android:name=".SavedQuestion" android:configChanges="orientation|screenSize" />
-        <activity android:name=".TestScores" />
-        <activity android:name=".Test" android:configChanges="orientation|screenSize" />
-        <activity android:name=".MainActivity" android:configChanges="orientation|screenSize" >
+        <activity android:name="com.nicktz.boat.TestsList" android:configChanges="orientation|screenSize" />
+        <activity android:name="com.nicktz.boat.QuestionsList" android:configChanges="orientation|screenSize" />
+        <activity android:name="com.nicktz.boat.TestQuestion" android:configChanges="orientation|screenSize" />
+        <activity android:name="com.nicktz.boat.SavedQuestion" android:configChanges="orientation|screenSize" />
+        <activity android:name="com.nicktz.boat.TestScores" />
+        <activity android:name="com.nicktz.boat.Test" android:configChanges="orientation|screenSize" />
+        <activity android:name="com.nicktz.boat.MainActivity" android:configChanges="orientation|screenSize" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

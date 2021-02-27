@@ -1,4 +1,4 @@
-package com.example.project;
+package com.nicktz.boat;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +17,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.Locale;
+
 import static android.os.Environment.DIRECTORY_DOWNLOADS;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,7 +33,27 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
-        dbHandler.initDatabase(this);
+        dbHandler.initDatabase(this, getFileName());
+    }
+
+    private String getFileName() {
+        Locale locale = getResources().getConfiguration().locale;
+        Locale greek = new Locale("el", "GR");
+
+        if (locale.equals(greek)) {
+            return "data-gr.txt";
+        }
+        else {
+            return "data-en.txt";
+        }
+
+
+//        Locale locale = new Locale(languageCode);
+//        Locale.setDefault(locale);
+//        Resources resources = activity.getResources();
+//        Configuration config = resources.getConfiguration();
+//        config.setLocale(locale);
+//        resources.updateConfiguration(config, resources.getDisplayMetrics());
     }
 
     public void goToTest(View view){
@@ -56,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        builder.setNegativeButton(getString(R.string.cancel),new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
@@ -89,13 +111,27 @@ public class MainActivity extends AppCompatActivity {
      * για να πραγματοποιήσει την λήψη του αρχείου.
      */
     private void startDownloading(){
+        Locale locale = getResources().getConfiguration().locale;
+        Locale greek = new Locale("el", "GR");
+
+        String firebaseFile;
+        final String downloadedFileName;
+        if (locale.equals(greek)) {
+            firebaseFile =  "theory-gr.pdf";
+            downloadedFileName = "Ύλη Εξέτασης - Δίπλωμα Ταχυπλόου Σκάφους";
+        }
+        else {
+            firebaseFile =  "theory-en.pdf";
+            downloadedFileName = "Examination Material - Boating License Exam";
+        }
+
         StorageReference storageReference;
         storageReference = FirebaseStorage.getInstance().getReference();
-        storageReference.child("theory.pdf").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        storageReference.child(firebaseFile).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 String url=uri.toString();
-                downloadFile(MainActivity.this,"Ύλη Εξέτασης - Δίπλωμα Ταχυπλόου Σκάφους",".pdf",DIRECTORY_DOWNLOADS, url);
+                downloadFile(MainActivity.this, downloadedFileName,".pdf",DIRECTORY_DOWNLOADS, url);
             }
         });
     }

@@ -1,23 +1,28 @@
-package com.example.project;
+package com.nicktz.boat;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
-public class TestsAdapter extends RecyclerView.Adapter<TestsAdapter.ViewHolder> {
-    private ArrayList<Integer> tests;
+public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.ViewHolder> {
+    private ArrayList<String> question;
+    private ArrayList<Boolean> trueOrFalse;
     private Context context;
     private OnQuestionListener onQuestionListener;
+    String code;
 
-    public TestsAdapter(ArrayList<Integer> tests, Context context, OnQuestionListener onQuestionListener) {
-        this.tests = tests;
-        this.context = context;
+    public QuestionsAdapter(ArrayList<String> question, ArrayList<Boolean> trueOrFalse, String code, Context mContext, OnQuestionListener onQuestionListener) {
+        this.question = question;
+        this.trueOrFalse = trueOrFalse;
+        this.code = code;
+        this.context = mContext;
         this.onQuestionListener = onQuestionListener;
     }
 
@@ -25,7 +30,7 @@ public class TestsAdapter extends RecyclerView.Adapter<TestsAdapter.ViewHolder> 
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
-        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.test_item, parent, false);
+        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.question_item, parent, false);
         return new ViewHolder(view, onQuestionListener);
     }
 
@@ -34,36 +39,39 @@ public class TestsAdapter extends RecyclerView.Adapter<TestsAdapter.ViewHolder> 
      */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.title.setText("Τεστ " + (position+1));
-        int testScore = tests.get(position);
-        if (testScore >= 18) {
-            holder.verdict.setText(context.getString(R.string.success_message));
-            holder.verdict.setTextColor(context.getResources().getColor(R.color.greenish));
+        if (!code.equals("saved_questions")) {
+            if (trueOrFalse.get(position))
+                holder.trueOrFalse.setImageResource(R.drawable.custom_correct);
+            else holder.trueOrFalse.setImageResource(R.drawable.custom_wrong);
         }
-        else {
-            holder.verdict.setText(context.getString(R.string.failure_message));
-            holder.verdict.setTextColor(context.getResources().getColor(R.color.reddish));
-        }
-        holder.score.setText(testScore + "/20");
+
+        //Αν το κείμενο της ερώτησης είναι μεγάλο, εμφανίζει ένα αρχικο απόσπασμα και μετα αποσιωπητικά.
+        if(question.get(position).length()<95)
+            holder.question.setText(question.get(position));
+        else
+            holder.question.setText(question.get(position).substring(0,85)+"...");
+
+
+        holder.title.setText(context.getString(R.string.question) + " " + (position+1));
     }
 
     @Override
     public int getItemCount() {
-        return tests.size();
+        return question.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        ImageView trueOrFalse;
+        TextView question;
         TextView title;
-        TextView verdict;
-        TextView score;
         ConstraintLayout parentLayout;
         OnQuestionListener onQuestionListener;
 
         public ViewHolder(@NonNull View itemView, OnQuestionListener onQuestionListener) {
             super(itemView);
+            trueOrFalse = itemView.findViewById(R.id.trueOrFalse);
+            question = itemView.findViewById(R.id.question);
             title = itemView.findViewById(R.id.title);
-            verdict = itemView.findViewById(R.id.verdict);
-            score = itemView.findViewById(R.id.score);
             parentLayout = itemView.findViewById(R.id.constraint);
             this.onQuestionListener = onQuestionListener;
             itemView.setOnClickListener(this);
